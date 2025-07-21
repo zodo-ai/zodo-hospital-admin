@@ -25,38 +25,39 @@ function History() {
 
   const columns = [
     {
-      title: "Order ID",
+      title: "ORDER ID",
       dataIndex: "order_id",
       // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
-      render: (text) => (
-        text ? <div className="d-flex align-items-center gap-2">
-          <span
-            style={{
-              maxWidth: 120,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-            title={text}
-          >
-            {text?.slice(0, 16)}...
-          </span>
-          <Tooltip title="Copy Order ID">
-            <Clipboard
-              size={16}
-              style={{ cursor: "pointer", color: "#347D73" }}
-              onClick={() => {
-                navigator.clipboard.writeText(text);
-                message.success("Copied to clipboard");
+      render: (text) =>
+        text ? (
+          <div className="d-flex align-items-center gap-2">
+            <span
+              style={{
+                maxWidth: 120,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
-            />
-          </Tooltip>
-        </div>
-        :
-        <div>N/A</div>
-      ),
+              title={text}
+            >
+              {text?.slice(0, 16)}...
+            </span>
+            <Tooltip title="Copy Order ID">
+              <Clipboard
+                size={16}
+                style={{ cursor: "pointer", color: "#347D73" }}
+                onClick={() => {
+                  navigator.clipboard.writeText(text);
+                  message.success("Copied to clipboard");
+                }}
+              />
+            </Tooltip>
+          </div>
+        ) : (
+          <div>N/A</div>
+        ),
     },
     {
-      title: "Initiated by",
+      title: "INITATED BY",
       dataIndex: "",
       render: (item, record) => (
         <div className="d-flex align-items-center">
@@ -66,10 +67,17 @@ function History() {
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
     },
     {
-      title: "Type",
+      title: "TYPE",
       dataIndex: "type",
       render: (item) => <div>{item || "N/A"}</div>,
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
+      filters: [
+        { text: "consultation", value: "consultation" },
+        { text: "service", value: "service" },
+        { text: "fast_tag", value: "fast_tag" },
+      ],
+      onFilter: (value, record) => record.type.startsWith(value),
+      filterSearch: true,
     },
     {
       title: <div className="text-center">Payment mode</div>,
@@ -80,26 +88,31 @@ function History() {
       ),
     },
     {
-      title: "Amount",
+      title: "AMOUNT",
       dataIndex: "amount",
       render: (item) => <div>₹{item}</div>,
-      // sorter: (a, b) => a.type.length - b.type.length,
+      sorter: (a, b) => a.amount - b.amount,
       // render: (item) => <div>₹ {item}</div>,
     },
     {
-      title: "Settlement Date",
+      title: "SETTLEMENT DATE",
       dataIndex: "updated_at",
       // sorter: (a, b) => a.time.length - b.time.length,
       render: (item) => <div>{formatToDate(item)}</div>,
       sorter: (a, b) => new Date(a.updated_at) - new Date(b.updated_at),
-       sortDirections: ["descend", "ascend"]
+      sortDirections: ["descend", "ascend"],
     },
     {
-      title: <div className="text-center">Status</div>,
+      title: "Status",
       dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
+      filters: [
+        { text: "completed", value: "completed" },
+        { text: "pending", value: "pending" },
+      ],
+      onFilter: (value, record) => record.status.startsWith(value),
+      filterSearch: true,
       render: (item) => (
-        <div className="d-flex justify-content-center">
+        <div>
           <StatusBadge status={item} />
         </div>
       ),

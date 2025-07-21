@@ -48,7 +48,7 @@ function Dashboard() {
   return (
     <Layout activeClassName="">
       <div className="page-wrapper">
-        <div className="content">
+        <div className="content pb-1">
           <Breadcrumb data={breadCrumpData} />
           <Hero />
           <ButtonTabs tabData={dashboardTab} />

@@ -17,10 +17,8 @@ function RequestedAppointments() {
 
   const requestedList =
     appointmentsList &&
-    appointmentsList?.filter(
-      (item) => item.timeSlot === null
-    );
-    
+    appointmentsList?.filter((item) => item.timeSlot === null);
+
   const [show, setShow] = useState(false);
   const [requestDetails, setRequestDetails] = useState({});
 
@@ -37,26 +35,18 @@ function RequestedAppointments() {
     {
       title: "Patient Name",
       dataIndex: "",
-      // sorter: (a, b) => a.patientname.length - b.patientname.length,
       render: (item, record) => (
         <div>{record?.user_details?.name ?? record?.user?.first_name}</div>
       ),
     },
-    {
-      title: "Initiated Date & Time",
-      dataIndex: "createdAt",
-      // sorter: (a, b) => a.time.length - b.time.length,
-      render: (item) => <div>{formatDate(item)}</div>,
-    },
+    
     {
       title: "Type",
       dataIndex: "type",
-      // sorter: (a, b) => a.type.length - b.type.length,
     },
     {
-      title: "Assigned Dr",
+      title: "ASSIGNED DOCTOR",
       dataIndex: "",
-      // sorter: (a, b) => a.assingned.length - b.assingned.length,
       render: (item, record) =>
         record?.doctor?.name ? (
           <div>{record?.doctor?.name}</div>
@@ -65,32 +55,35 @@ function RequestedAppointments() {
         ),
     },
     {
-      title: "Contact Info",
+      title: "PHONE NUMBER",
       dataIndex: "contactinfo",
-      // sorter: (a, b) => a.contactinfo.length - b.contactinfo.length,
       render: (item, record) => <div>{record?.user?.phone}</div>,
     },
     {
-      title: <div className="text-center">Action</div>,
+      title: "INITIATED DATE & TIME",
+      dataIndex: "createdAt",
+      render: (item) => <div>{formatDate(item)}</div>,
+      sorter: (a, b) => {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      },
+    },
+    {
+      title: <div className="text-center">ACTION</div>,
       dataIndex: "",
-      render: (item, record) => (
-        record?.type === "fast_tag" ?
-        
-        <div className="text-center">N/A</div>
-        
-        :
-        <div className="d-flex justify-content-center">
-
-        <Link
-          to="?tab=requested"
-          className="hospital-add-btn rounded-pill ms-md-1 text-white schedule-btn"
-          // onClick={() => setShow(true)}
-          onClick={() => handleSchedule(record)}
-        >
-          Schedule Now
-        </Link>
+      render: (item, record) =>
+        record?.type === "fast_tag" ? (
+          <div className="text-center">N/A</div>
+        ) : (
+          <div className="d-flex justify-content-center">
+            <Link
+              to="?tab=requested"
+              className="hospital-add-btn rounded-pill ms-md-1 text-white schedule-btn"
+              onClick={() => handleSchedule(record)}
+            >
+              Schedule Now
+            </Link>
           </div>
-      ),
+        ),
     },
   ];
 

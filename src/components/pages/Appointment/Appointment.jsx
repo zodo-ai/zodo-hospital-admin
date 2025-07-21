@@ -7,13 +7,7 @@ import AppointmentButtonTab from "../../tabs/AppointmentButtonTab";
 import SideModal from "../../modals/SideModal";
 import { useState } from "react";
 import CreateAppointment from "../../Appointment/CreateAppointment";
-// import Appointments from '../../Appointment/Appointments'
 function Appointment() {
-  // const { hospitalId } = useAuth();
-  // const { data: appointmentsList, isLoading } =
-  //   useHospitalAppointments(hospitalId);
-  // console.log(appointmentsList);
-
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -21,18 +15,12 @@ function Appointment() {
   const handleShow = () => {
     setShow(true);
   };
-  // const requestedList = appointmentsList?.filter(
-  //   (item) => item.timeSlot === null && item.type !== "service"
-  // );
   const appointmentTab = [
     {
       id: "appointment",
       title: "Appoinment",
       content: (
-        <Appointments
-        // appointments={appointmentsList ?? []}
-        // loading={isLoading}
-        />
+        <Appointments/>
       ),
       link: "appointment",
     },
@@ -40,10 +28,7 @@ function Appointment() {
       id: "requested",
       title: "Requested",
       content: (
-        <RequestedAppointments
-        // appointments={requestedList ?? []}
-        // loading={isLoading}
-        />
+        <RequestedAppointments/>
       ),
       link: "requested",
     },

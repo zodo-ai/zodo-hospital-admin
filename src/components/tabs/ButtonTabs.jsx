@@ -8,7 +8,7 @@ function ButtonTabs(props) {
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
-        <ul className="nav nav-tabs nav-tabs-solid nav-tabs-rounded mt-3 bg-white tabs-list">
+        <ul className="nav nav-tabs nav-tabs-solid nav-tabs-rounded bg-white tabs-list">
           {tabData.map((item, i) => (
             <li
               className="nav-item bg-white rounded-pill p-2"

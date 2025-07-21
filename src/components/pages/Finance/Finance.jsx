@@ -18,18 +18,30 @@ function Finance() {
       link: "/finance",
     },
   ];
-  
+
   const financeTab = [
-    { id: "payout", title: "Payout", content: <Payout data={hospitalAnalytics}/>, link: "payout" },
+    {
+      id: "payout",
+      title: "Payout",
+      content: <Payout data={hospitalAnalytics} />,
+      link: "payout",
+    },
     { id: "history", title: "History", content: <History />, link: "history" },
-    { id: "settlements", title: "settlements", content: <Settlements />, link: "settlements" },
+    {
+      id: "settlements",
+      title: "settlements",
+      content: <Settlements />,
+      link: "settlements",
+    },
   ];
   return (
     <Layout activeClassName="finance" id="menu-item5" id1="menu-items5">
       <div className="page-wrapper">
-        <div className="content">
+        <div className="content pb-1">
           <Breadcrumb data={breadCrumpData} />
-          <ButtonTabs tabData={financeTab} />
+          <div className="pt-1">
+            <ButtonTabs tabData={financeTab} />
+          </div>
           {isLoading && <FullscreenLoader />}
         </div>
       </div>

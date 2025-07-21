@@ -4,7 +4,6 @@ import EditStaff from "../modals/AddStaff/EditStaff";
 import { user_profile } from "../imagepath";
 import DataTable from "./DataTable";
 import { useAuth } from "../../hooks/useAuth";
-// import { useHospitalStaffs } from "../../hooks/users/useHospitalStaffs";
 import { Link } from "react-router-dom";
 import useDeleteStaff from "../../hooks/staff/useDeleteStaff";
 import PropTypes from "prop-types";
@@ -56,7 +55,7 @@ function StaffTable(props) {
     {
       title: "Staff Name",
       dataIndex: "first_name",
-      // sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) => a.first_name.localeCompare(b.first_name),
       render: (item, record) => (
         <div className="d-flex">
           <div>
@@ -79,20 +78,6 @@ function StaffTable(props) {
       dataIndex: "phone",
       // sorter: (a, b) => a.empid.length - b.empid.length,
     },
-
-    {
-      title: "Joining Date",
-      dataIndex: "created_at",
-      render: (item) => <div>{formatToDate(item)}</div>,
-      // render:(item, record)=>{
-      //   const date = record?.created_at;
-      //   const dateOnly = new Date(date).toLocaleDateString();
-      //   return (
-      //     <div>{dateOnly}</div>
-      //   )
-      // }
-      // sorter: (a, b) => a.joiningDate.length - b.joiningDate.length,
-    },
     {
       title: "Departments",
       dataIndex: "departments",
@@ -110,18 +95,39 @@ function StaffTable(props) {
     {
       title: "Type",
       dataIndex: "user_type",
-      // sorter: (a, b) => a.pricing.length - b.pricing.length,
+      filters: [
+        { text: "hsAdmin", value: "hsAdmin" },
+        { text: "staff", value: "staff" },
+        { text: "doctor", value: "doctor" },
+      ],
+      onFilter: (value, record) => record.user_type === value,
+      filterSearch: true,
     },
+
     {
-          title: <div className="text-center">Status</div>,
-          dataIndex: "is_active",
-          // sorter: (a, b) => a.status.length - b.status.length,
-          render: (status) => (
-            <div className="d-flex justify-content-center">
-              <StatusBadge status={status ? "active":"inactive"} />
-            </div>
-          ),
-        },
+      title: "Joining Date",
+      dataIndex: "created_at",
+      render: (item) => <div>{formatToDate(item)}</div>,
+      sorter: (a, b) => {
+        return new Date(a.work_start_date) - new Date(b.work_start_date);
+      },
+    },
+
+    {
+      title: "Status",
+      dataIndex: "is_active",
+      filters: [
+        { text: "active", value: true },
+        { text: "inactive", value: false },
+      ],
+      onFilter: (value, record) => record.is_active === value,
+      filterSearch: true,
+      render: (status) => (
+        <div>
+          <StatusBadge status={status ? "active" : "inactive"} />
+        </div>
+      ),
+    },
     {
       title: "",
       dataIndex: "",
@@ -194,7 +200,7 @@ function StaffTable(props) {
         handleClose={handleClose}
         title="Staff Details"
       >
-        <StaffAppointments staffDetails={staffDetails}/>
+        <StaffAppointments staffDetails={staffDetails} />
       </SideModal>
     </div>
   );

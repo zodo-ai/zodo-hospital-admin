@@ -13,47 +13,36 @@ import { useState } from "react";
 
 function AppointmentTable(props) {
   const { appointmentList, loading, handleDate, query } = props;
-  // const [prescriptionUrl, setPrescriptionUrl] = useState("");
   const { mutate } = useApproveAppointment();
   const [showApprove, setShowApprove] = useState(false);
-  const [appointmentId,setAppointmentId] = useState("");
-  // const handleClose = () => {
-  //   setShow(false);
-  // };
-  // const handleView = (url) => {
-  //   // Logic to handle view action
-  //   setPrescriptionUrl(url);
-  //   // Open the modal to show the prescription
-  //   setShow(true);
-  // };
+  const [appointmentId, setAppointmentId] = useState("");
 
   const handleAppointment = (id) => {
     setAppointmentId(id);
     setShowApprove(true);
-    // mutate(id);
   };
 
-  const approveAppointment = ()=>{
+  const approveAppointment = () => {
     mutate(appointmentId, {
-      onSuccess:()=>{
+      onSuccess: () => {
         setShowApprove(false);
-      }
-    })
-  }
-  
+      },
+    });
+  };
+
   const columns = [
     {
-      title: "Booking ID",
+      title: "BOOKING ID",
       dataIndex: "booking_id",
       // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
     },
     {
-      title: "Type",
+      title: "TYPE",
       dataIndex: "type",
       // sorter: (a, b) => a.type.length - b.type.length,
     },
     {
-      title: "Patient Name",
+      title: "PATIENT NAME",
       dataIndex: "patientname",
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
       render: (_item, record) => (
@@ -61,61 +50,52 @@ function AppointmentTable(props) {
       ),
     },
     {
-      title: <div className="text-center">Assigned Doctor</div>,
+      title: "ASSIGNED DOCTOR",
       dataIndex: "assingned",
       render: (_item, record) =>
         record?.doctor?.name ? (
-          <div className="text-start">Dr.{record?.doctor?.name}</div>
+          <div>Dr.{record?.doctor?.name}</div>
         ) : (
-          <div className="text-center">N/A</div>
+          <div>N/A</div>
         ),
     },
 
     {
-      title: "Time Slot",
+      title: "TIME SLOT",
       dataIndex: "timeSlot",
       // sorter: (a, b) => a.time.length - b.time.length,
       render: (_item, record) => (
-        <div>{formatTime(record?.timeSlot) ?? "unassigned"}</div>
+        <div>{_item ? formatTime(record?.timeSlot) : "unassigned"}</div>
       ),
     },
     {
-      title: <div className="text-center">Appointment Date</div>,
+      title: "APPOINTMENT DATE",
       dataIndex: "appointmentDate",
-      render: (item) => <div className="text-center">{formatToDate(item)}</div>,
-      // sorter: (a, b) => a.time.length - b.time.length,
+      render: (item) => <div>{formatToDate(item)}</div>,
+      sorter: (a, b) => {
+        return new Date(a.appointmentDate) - new Date(b.appointmentDate);
+      },
     },
     {
-      title: <div className="text-center">Status</div>,
+      title: "STATUS",
       dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
+      filters: [
+        { text: "completed", value: "completed" },
+        { text: "accepted", value: "accepted" },
+        { text: "started", value: "started" },
+        { text: "rejected", value: "rejected" },
+
+      ],
+      onFilter: (value, record) => record.status.startsWith(value),
+      filterSearch: true,
       render: (item) => (
-        <div className="d-flex justify-content-center">
+        <div>
           <StatusBadge status={item} />
         </div>
       ),
     },
-
-    // {
-    //   title: "Prescription",
-    //   dataIndex: "prescription",
-    //   render: (_item, record) => {
-    //     return record?.prescriptionUrl ? (
-    //       <div style={{ display: "flex", gap: 8, paddingLeft: "20px" }}>
-    //         <Link to onClick={() => handleView(record?.prescriptionUrl)}>
-    //           View
-    //         </Link>
-    //         <Link to>
-    //           <img src={pdficon} alt="Pdf Icon" width={17} />
-    //         </Link>
-    //       </div>
-    //     ) : (
-    //       <div style={{ paddingLeft: "25px" }}>N/A</div>
-    //     );
-    //   },
-    // },
     {
-      title: "Actions",
+      title: "ACTION",
       dataIndex: "actions",
       render: (_item, record) => {
         return (
@@ -159,21 +139,6 @@ function AppointmentTable(props) {
                   <i className="fa fa-check me-2" />
                   Approve
                 </button>
-                {/* <Link
-                  className="dropdown-item"
-                  to
-                  // onClick={() => handleEdit(record.id)}
-                >
-                  <i className="far fa-edit me-2" />
-                  Edit
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  // onClick={() => handleDeleteClick(record.id)}
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link> */}
               </div>
             </div>
           </div>
@@ -183,16 +148,16 @@ function AppointmentTable(props) {
   ];
   return (
     <div>
-      <DateSearchHero handleDate={handleDate} type="hospital-bookings" query={query}/>
+      <DateSearchHero
+        handleDate={handleDate}
+        type="hospital-bookings"
+        query={query}
+      />
       <DataTable
         columns={columns}
         dataSource={appointmentList ?? []}
         loading={loading}
       />
-      {/* <CenteredModal show={show} handleClose={handleClose}>
-        <Prescription prescriptionUrl={prescriptionUrl} />
-      </CenteredModal> */}
-
       <ConfirmModal
         show={showApprove}
         setShow={setShowApprove}

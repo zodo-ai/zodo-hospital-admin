@@ -58,7 +58,7 @@ function DoctorsTable(props) {
     {
       title: "Doctor Name",
       dataIndex: "name",
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) => a.name.localeCompare(b.name),
       render: (item, record) => (
         <div className="d-flex">
           <div>
@@ -79,25 +79,12 @@ function DoctorsTable(props) {
     {
       title: "Phone",
       dataIndex: "phone_number",
-      // sorter: (a, b) => a.empid.length - b.empid.length,
-    },
-
-    {
-      title: "Joining Date",
-      dataIndex: "work_start_date",
-      render: (item) => <div>{item ? formatToDate(item) : "N/A"}</div>,
-      // sorter: (a, b) => a.joiningDate.length - b.joiningDate.length,
     },
     {
       title: "Departments",
       dataIndex: "departments",
-      // sorter: (a, b) => a.department.length - b.department.length,
-      // render: (item) => (
-      //   <div className="table-text">
-      //     <h6>{item}hs</h6>
-      //   </div>
-      // ),
-      key:"departments",
+
+      key: "departments",
       render: (departments) => (
         <div className="d-flex flex-wrap gap-2" style={{ maxWidth: "200px" }}>
           {departments?.map((dept) => (
@@ -112,13 +99,31 @@ function DoctorsTable(props) {
       title: "Pricing",
       dataIndex: "pricing",
       // sorter: (a, b) => a.pricing.length - b.pricing.length,
+      sorter: (a, b) => {
+        return a.pricing - b.pricing;
+      },
       render: (item) => <div>₹{item}</div>,
+    },
+    {
+      title: "Joining Date",
+      dataIndex: "work_start_date",
+      render: (item) => <div>{item ? formatToDate(item) : "N/A"}</div>,
+      sorter: (a, b) => {
+        return new Date(a.work_start_date) - new Date(b.work_start_date);
+      },
+      // sorter: (a, b) => a.joiningDate.length - b.joiningDate.length,
     },
     {
       title: "Status",
       dataIndex: "status",
       // sorter: (a, b) => a.pricing.length - b.pricing.length,
       render: (item) => <StatusBadge status={item} />,
+      filters: [
+        { text: "active", value: "active" },
+        { text: "inactive", value: "inactive" },
+      ],
+      onFilter: (value, record) => record.status.startsWith(value),
+      filterSearch: true,
     },
     {
       title: "",

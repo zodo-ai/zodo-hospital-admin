@@ -5,6 +5,7 @@ import { Clipboard } from "react-feather";
 import StatusBadge from "../assests/StatusBadge";
 import { useAuth } from "../../hooks/useAuth";
 import { formatToDate } from "../configs/formatToDate";
+import { Link } from "react-router-dom";
 
 function PayoutTable() {
   const { hospitalId } = useAuth();
@@ -16,7 +17,7 @@ function PayoutTable() {
   );
   const columns = [
     {
-      title: "Order ID",
+      title: "ORDER ID",
       dataIndex: "order_id",
       // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
       render: (text) =>
@@ -48,7 +49,7 @@ function PayoutTable() {
         ),
     },
     {
-      title: "Initiated by",
+      title: "INITIATED BY",
       dataIndex: "",
       render: (item, record) => (
         <div className="d-flex align-items-center">
@@ -58,13 +59,13 @@ function PayoutTable() {
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
     },
     {
-      title: "Type",
+      title: "TYPE",
       dataIndex: "type",
       render: (item) => <div>{item || "N/A"}</div>,
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
     },
     {
-      title: <div className="text-center">Payment mode</div>,
+      title: <div className="text-center">PAYMENT MODE</div>,
       dataIndex: "payment_type",
       // sorter: (a, b) => a.type.length - b.type.length,
       render: (item) => (
@@ -72,14 +73,14 @@ function PayoutTable() {
       ),
     },
     {
-      title: "Amount",
+      title: "AMOUNT",
       dataIndex: "amount",
       render: (item) => <div>₹{item}</div>,
       // sorter: (a, b) => a.type.length - b.type.length,
       // render: (item) => <div>₹ {item}</div>,
     },
     {
-      title: "Settlement Date",
+      title: "SETTLEMENT DATE",
       dataIndex: "updated_at",
       // sorter: (a, b) => a.time.length - b.time.length,
       render: (item) => <div>{formatToDate(item)}</div>,
@@ -87,11 +88,10 @@ function PayoutTable() {
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: <div className="text-center">Status</div>,
+      title: "STATUS",
       dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
       render: (item) => (
-        <div className="d-flex justify-content-center">
+        <div>
           <StatusBadge status={item} />
         </div>
       ),
@@ -99,7 +99,13 @@ function PayoutTable() {
   ];
   return (
     <div className="card-box mt-4">
-      <h4>Recent Payout Requests</h4>
+      <div className="d-flex justify-content-between">
+        <h4 style={{ fontWeight: "600" }}>Recent Payout Requests</h4>
+        <Link to="/finance?tab=history" style={{ fontSize: "0.95rem" }}>
+          {" "}
+          See all{" "}
+        </Link>
+      </div>
       <DataTable
         columns={columns}
         dataSource={payouts ?? []}

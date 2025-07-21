@@ -6653,10 +6653,11 @@ a.btn.add-links:hover {
   border-radius: 8px;
   display: inline-block;
   font-size: 12px;
-  min-width: 115px;
+  min-width: 90px;
   padding: 5px 15px;
   text-align: center;
   border: 0;
+  font-weight: 600;
 }
 .delete-badge {
   border-radius: 5px;
@@ -12196,4 +12197,58 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+.ant-table-filter-column .ant-dropdown-trigger {
+  color: #347D73; /* Change to your desired color */
+}
+
+/* Optional: change color on hover/focus if default is different */
+.ant-table-filter-column .ant-dropdown-trigger:hover,
+.ant-table-filter-column .ant-dropdown-trigger.ant-dropdown-open {
+  color: #347D73; /* Example hover/active color */
+}
+
+/* If you need to target the SVG specifically (less common for simple color change) */
+.ant-table-filter-column .ant-dropdown-trigger svg {
+  fill: #347D73; /* This targets the SVG's fill property */
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-primary {
+  background-color: #347D73 !important;
+  border-color: #347D73 !important;
+  color: #fff !important;
+}
+
+/* Targeting the "Reset" link in the filter dropdown */
+.ant-table-filter-dropdown .ant-table-filter-dropdown-link:first-of-type {
+  color: #347D73 !important; /* Use !important if specificity issues arise */
+}
+
+/* Or, if the button approach is used (common in newer Antd versions) */
+.ant-table-filter-dropdown-btns .ant-btn-link:first-child {
+  color: #347D73 !important; /* Targets the 'Reset' button specifically */
+}
+
+/* Optional: change hover/active color */
+.ant-table-filter-dropdown .ant-table-filter-dropdown-link:first-of-type:hover,
+.ant-table-filter-dropdown-btns .ant-btn-link:first-child:hover {
+  color: #347D73 !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #1B7C7B !important; /* Your desired green */
+  border-color: #1B7C7B !important;     /* Your desired green */
+}
+
+/* Change checkbox border when unchecked (optional, if you want a specific color before checking) */
+.ant-checkbox .ant-checkbox-inner {
+  border-color: #1B7C7B !important; /* Example: default border for unchecked */
+}
+
+/* Change the background of the checkbox on hover and focus */
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner,
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: #1B7C7B !important; /* Matches checked color for consistent hover */
 }

@@ -99,7 +99,7 @@ function DoctorAppointments({ doctorDetails }) {
         </div>
       </div>
       <div className="ms-2 me-2 mt-4">
-        <h4>Appointmentsss</h4>
+        <h4>Appointments</h4>
         <DoctorAppointmentTable
           appointmentList={appointmentList}
           loading={isLoading}

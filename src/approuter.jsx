@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/login";
 import Settingssociallinks from "./components/settings/Settingssociallinks";
 import SettingsChangePassword from "./components/settings/SettingsChangePassword";
-// import DoctorList from "./components/doctor/DoctorList";
 import ForgotPassword from "./components/pages/login/ForgotPassword";
 import Signup from "./components/pages/login/Signup";
 import Register from "./components/pages/login/Register";
