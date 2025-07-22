@@ -26,7 +26,13 @@ export const editDoctor = async ({ id, data }) => {
   return response.data;
 };
 
+export const changeDoctorStatus = async ({id, data}) => {
+  const response = await apiClient.patch(`/doctors/${id}/change-status`, data);
+  return response.data;
+};
+
 export const deleteDoctorById = async (id) => {
   const response = await apiClient.delete(`doctors/${id}`);
   return response?.data || {};
 };
+

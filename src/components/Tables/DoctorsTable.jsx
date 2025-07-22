@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import PropTypes from "prop-types";
 import EditDoctor from "../modals/AddDoctor/EditDoctor";
-import useDeleteDoctor from "../../hooks/doctors/useDeleteDoctor";
 import { useAuth } from "../../hooks/useAuth";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
 import CircularImage from "../assests/CircularImage";
@@ -14,6 +13,8 @@ import StatusBadge from "../assests/StatusBadge";
 import SideModal from "../modals/SideModal";
 import DoctorAppointments from "../Doctors/DoctorsBookings/DoctorAppointments";
 import { Tag } from "antd";
+import { useChangeDoctorStatus } from "../../hooks/doctors/useChangeDoctorStatus";
+import ToggleModal from "../modals/ToggleModal";
 
 function DoctorsTable(props) {
   const { doctorsList, loading } = props;
@@ -23,7 +24,11 @@ function DoctorsTable(props) {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const { hospitalId } = useAuth();
   const { data: doctorsData } = useDoctorsList(hospitalId);
-  const { mutate, isLoading } = useDeleteDoctor();
+  const [disable, setdisable] = useState(false);
+  const [status, setStatus] = useState("");
+  // const { mutate, isLoading } = useDeleteDoctor();
+  const { mutate, isLoading: statusChangeLoading } = useChangeDoctorStatus();
+
   const [doctorDetails, setDoctorDetails] = useState({});
   useEffect(() => {
     if (doctorsData) {
@@ -42,13 +47,19 @@ function DoctorsTable(props) {
     setShowView(true);
   };
 
-  const handleDeleteClick = (id) => {
+  const handleTogglebtn = (id, status) => {
     setSelectedDoctor(id);
     setShow(true);
+    setStatus(status);
   };
 
   const handleDelete = async () => {
-    await mutate(selectedDoctor);
+    console.log("Disable !",disable);
+    
+    const data = {
+      status: status === "active" ? "disabled" : "active",
+    };
+    await mutate({ id: selectedDoctor, data: data });
   };
 
   const handleClose = () => {
@@ -160,9 +171,25 @@ function DoctorsTable(props) {
                 <Link
                   className="dropdown-item"
                   to="#"
-                  onClick={() => handleDeleteClick(record.id)}
+                  onClick={() => handleTogglebtn(record.id, record.status)}
                 >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  <div
+                    // onClick={handleTogglebtn}
+                    className="status-toggle d-flex align-items-center"
+                  >
+                    <input
+                      type="checkbox"
+                      id="status"
+                      className="check"
+                      checked={record?.status === "active" ? true : false}
+                    />
+                    <label htmlFor="status" className="checktoggle-small">
+                      checkbox
+                    </label>
+                    <span className="ps-2">
+                      {record?.status === "active" ? "Disable" : "Enable"}
+                    </span>
+                  </div>
                 </Link>
               </div>
             </div>
@@ -183,7 +210,7 @@ function DoctorsTable(props) {
         show={show}
         title="Doctor"
         handleDelete={handleDelete}
-        isLoading={isLoading}
+        isLoading={statusChangeLoading}
       />
       <EditDoctor
         setShow={setShowEdit}
@@ -199,6 +226,16 @@ function DoctorsTable(props) {
       >
         <DoctorAppointments doctorDetails={doctorDetails} />
       </SideModal>
+
+      <ToggleModal
+        show={show}
+        setShow={setShow}
+        setdisable={setdisable}
+        disable={disable}
+        title="Doctor"
+        handleDisable={handleDelete}
+        isLoading={statusChangeLoading}
+      />
     </div>
   );
 }
