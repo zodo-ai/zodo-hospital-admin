@@ -218,8 +218,8 @@ function ConsultationAppointment({ handleClose }) {
               name="contactNumber"
               label="Contact Number"
               validation={{ required: "Contact number is required" }}
-              placeholder="Contact number"
-              type="text"
+              placeholder=""
+              type="phone"
             />
           </div>
 

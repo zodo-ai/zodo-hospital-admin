@@ -225,7 +225,7 @@ function EditHospitalForm() {
                 label="Contact number"
                 validation={{ required: "Contact number is required" }}
                 placeholder=""
-                type="text"
+                type="phone"
               />
             </div>
           </div>
