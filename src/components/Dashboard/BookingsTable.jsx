@@ -16,19 +16,14 @@ function BookingsTable() {
     ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 5);
 
-  console.log(recentBookings);
-
-  // console.log(bookings);
   const columns = [
     {
       title: "BOOKING ID",
       dataIndex: "booking_id",
-      // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
     },
     {
       title: "PATIENT NAME",
       dataIndex: "patientname",
-      // sorter: (a, b) => a.patientname.length - b.patientname.length,
       render: (item, record) => (
         <div>{record?.user_details?.name || record?.user?.first_name}</div>
       ),
@@ -36,12 +31,10 @@ function BookingsTable() {
     {
       title: "TYPE",
       dataIndex: "type",
-      // sorter: (a, b) => a.type.length - b.type.length,
     },
     {
       title: "TIME",
       dataIndex: "timeSlot",
-      // sorter: (a, b) => a.time.length - b.time.length,
       render: (item) => <div>{item ? formatTime(item) : "N/A"}</div>,
     },
     {
@@ -60,12 +53,10 @@ function BookingsTable() {
         ) : (
           <div>{record.type === "service" ? "N/A" : "unasigned"}</div>
         ),
-      // sorter: (a, b) => a.assingned.length - b.assingned.length,
     },
     {
       title: "STATUS",
       dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
       render: (item) => (
         <div>
           <StatusBadge status={item} />

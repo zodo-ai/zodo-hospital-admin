@@ -5,7 +5,6 @@ import DataTable from "../../Tables/DataTable";
 
 function ServicesTable(props) {
   const { selectedService } = props;
-  console.log(selectedService);
   const columns = [
     {
       title: "Staff Name",
@@ -26,28 +25,17 @@ function ServicesTable(props) {
     {
       title: "Phone",
       dataIndex: "phone",
-      // sorter: (a, b) => a.empid.length - b.empid.length,
     },
 
     {
       title: "Joining Date",
       dataIndex: "created_at",
-      // render:(item, record)=>{
-      //   const date = record?.created_at;
-      //   const dateOnly = new Date(date).toLocaleDateString();
-      //   return (
-      //     <div>{dateOnly}</div>
-      //   )
-      // }
-      // sorter: (a, b) => a.joiningDate.length - b.joiningDate.length,
     },
     {
       title: "Department",
       dataIndex: "",
-      // sorter: (a, b) => a.department.length - b.department.length,
       render: (item, record) => {
         // const department = record?.departments[0]
-        // console.log("Department ",record?.departments);
         const departmentLen = record?.departments?.length;
         const departments =
           departmentLen !== 0 &&

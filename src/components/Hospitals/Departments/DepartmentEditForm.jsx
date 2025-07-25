@@ -9,7 +9,7 @@ import { useViewDepartment } from "../../../hooks/departments/useViewDepartment"
 function DepartmentEditForm(props) {
   const { handleClose, departmentId } = props;
   const { data: departmentDetails } = useViewDepartment(departmentId);
-  const [status,setStatus] = useState(departmentDetails?.status);
+  const [status, setStatus] = useState(departmentDetails?.status);
   const methods = useForm();
   const { mutate, isLoading } = useEditDepartment();
 
@@ -24,7 +24,7 @@ function DepartmentEditForm(props) {
     const department = {
       name: data.departmentName,
       description: data.message,
-      status: status
+      status: status,
     };
     await mutate(
       { id: departmentId, data: department },
@@ -71,15 +71,6 @@ function DepartmentEditForm(props) {
         </div>
 
         <div className="form-group d-flex justify-content-end pt-3">
-          <button
-            to="#"
-            //   data-bs-toggle="modal"
-            //   data-bs-target="#delete_invoices_details"
-            className="hospital-draft-btn text-primary pt-1 pb-1 ps-3 pe-3 rounded"
-            onClick={() => handleClose()}
-          >
-            Cancel
-          </button>
           <button
             to="#"
             //   data-bs-toggle="modal"

@@ -62,16 +62,12 @@ function Overview(props) {
       about: data?.about,
     };
 
-    // console.log(mutate);
-
     await mutate(doctor, {
       onSuccess: () => {
         methods.reset();
         handleClose();
       }
     });
-    // methods.reset();
-    // handleClose();
   };
 
   const handleFileURL = (url) => {

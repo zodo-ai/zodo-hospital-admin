@@ -6,17 +6,8 @@ import { useAutoSloting } from "../../../hooks/timeslot/useAutoSloting";
 function DoctorTimeslot(props) {
   const { selectedDoctor } = props;
   const { mutate } = useAutoSloting();
-  // console.log(selectedDoctor);
   const { data:doctor } = useDoctorView(selectedDoctor)
-  // const tabData = [
-  //   { id: "morning", title: "Morning", content: <Timeslots /> },
-  //   { id: "afternoon", title: "Afternoon", content: <Timeslots /> },
-  //   {
-  //     id: "evening",
-  //     title: "Evening",
-  //     content: <Timeslots />,
-  //   },
-  // ];
+  
   
   const handleSlot = async () => {
     const data = {

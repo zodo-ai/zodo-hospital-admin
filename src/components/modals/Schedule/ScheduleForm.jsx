@@ -34,7 +34,6 @@ function ScheduleForm(props) {
     hospitalId,
     requestDetails.appointmentDate
   );
-  console.log("Doctor ID: ", timeslotLoading);
   if (!timeslots) <div>Loading</div>;
   const { morning, evening, afternoon } = categorizeSlots(timeslots || []);
   const handelTimeslot = (slot) => {
@@ -45,7 +44,11 @@ function ScheduleForm(props) {
       id: "schedule_morning",
       title: "Morning",
       content: (
-        <Timeslot slots={morning || []} handelTimeslot={handelTimeslot} />
+        <Timeslot
+          slots={morning || []}
+          handelTimeslot={handelTimeslot}
+          loading={timeslotLoading}
+        />
       ),
       link: "morning",
       mainTab: "requested",
@@ -54,7 +57,11 @@ function ScheduleForm(props) {
       id: "schedule_afternoon",
       title: "Afternoon",
       content: (
-        <Timeslot slots={afternoon || []} handelTimeslot={handelTimeslot} />
+        <Timeslot
+          slots={afternoon || []}
+          handelTimeslot={handelTimeslot}
+          loading={timeslotLoading}
+        />
       ),
       link: "afternoon",
       mainTab: "requested",
@@ -63,7 +70,11 @@ function ScheduleForm(props) {
       id: "schedule_evening",
       title: "Evening",
       content: (
-        <Timeslot slots={evening || []} handelTimeslot={handelTimeslot} />
+        <Timeslot
+          slots={evening || []}
+          handelTimeslot={handelTimeslot}
+          loading={timeslotLoading}
+        />
       ),
       link: "evening",
       mainTab: "requested",
@@ -78,92 +89,12 @@ function ScheduleForm(props) {
       },
     });
   }, [requestDetails]);
-  // const control = methods.control;
-  // const selectedDoctor = useWatch({ control, name: "doctor" });
-  // useEffect(() => {
-  //   setDoctor(selectedDoctor?.value ?? "");
-  // }, [selectedDoctor]);
-
-  // const onAssignAppointment = () => {
-  //   console.log("logic");
-  // };
 
   return (
-    // <FormProvider {...methods}>
-    //   <form
-    //     className="schedule-form"
-    //     onSubmit={methods.handleSubmit(onAssignAppointment)}
-    //   >
-    //     <div className="row mt-2">
-    //       <div className="col-md-6">
-    //         <div className="form-group">
-    //           <SelectField
-    //             options={doctorOptions}
-    //             label="Assign doctor"
-    //             name="doctor"
-    //             isMultiSelect={false}
-    //             placeholder=""
-    //             isLoading={doctorLoading}
-    //           />
-    //         </div>
-    //       </div>
-    //       <div className="col-md-6">
-    //         <div className="form-group">
-    //           <SelectField
-    //             options={department}
-    //             label="Department"
-    //             name="department"
-    //             isMultiSelect={false}
-    //             placeholder="Select department"
-    //             // validationMessage="Specialisations are required"
-    //             // isLoading={specialisationLoading}
-    //             isLoading={isLoading}
-    //           />
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     <h4 className="card-title mt-2">Time Slot Available</h4>
-    //     <ModalTabs tabData={tabData} />
-    //   </form>
-    // </FormProvider>
     <form
       className="schedule-form"
       // onSubmit={methods.handleSubmit(onAssignAppointment)}
     >
-      {/* <div className="row mt-2">
-        <div className="col-md-6">
-          <div className="form-group">
-            <label className="form-label">Doctor</label>
-            <Select
-              options={doctorOptions}
-              label="Assign doctor"
-              name="doctor"
-              isMultiSelect={false}
-              placeholder=""
-              isLoading={doctorLoading}
-              onChange={(selectedOption) => {
-                setDoctorId(selectedOption.value ?? "");
-              }}
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form-group">
-            <label className="form-label">Department</label>
-            <Select
-              options={departmentOptions}
-              label="Department"
-              name="department"
-              isMultiSelect={false}
-              placeholder="Select department"
-              // validationMessage="Specialisations are required"
-              // isLoading={departmentLoading}
-              isLoading={departmentLoading}
-            />
-          </div>
-        </div>
-      </div> */}
       <h4 className="card-title mt-2">Assigned Doctor</h4>
 
       <div className="d-flex align-items-center mt-3">
@@ -181,7 +112,11 @@ function ScheduleForm(props) {
           </div>
           <small>
             {requestDetails?.doctor?.departments?.length > 0 && (
-              <span>{requestDetails?.doctor?.departments?.map((dept)=> dept.name).join(", ")}</span>
+              <span>
+                {requestDetails?.doctor?.departments
+                  ?.map((dept) => dept.name)
+                  .join(", ")}
+              </span>
             )}
           </small>
           {/* <div>{requestDetails?.user_type}</div> */}

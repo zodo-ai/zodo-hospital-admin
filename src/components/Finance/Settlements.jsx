@@ -20,8 +20,6 @@ function Settlements() {
     setDatequery(query);
     // setdate(date);
   };
-  console.log("Settlements ", settlements);
-
   const columns = [
     {
       title: "INITIATED BY",

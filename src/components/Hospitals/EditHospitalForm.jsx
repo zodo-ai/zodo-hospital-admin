@@ -159,8 +159,6 @@ function EditHospitalForm() {
         gst: data?.gstnumber,
         documents: fileArray,
       };
-      // console.log("hospital !!", hospital);
-      // console.log(mutate);
       await mutate({ id: hospitalId, data: hospital });
       // methods.reset();
     } else {

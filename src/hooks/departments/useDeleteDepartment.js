@@ -30,8 +30,6 @@ const useDeleteDepartment = () => {
 
     },
     onError: (error, id, context) => {
-      console.log(error);
-
       const errotMessage =
         error?.response?.data?.message || "Failed to delete Department";
       // Rollback if there is an error

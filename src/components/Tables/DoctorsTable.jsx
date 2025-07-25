@@ -53,9 +53,7 @@ function DoctorsTable(props) {
     setStatus(status);
   };
 
-  const handleDelete = async () => {
-    console.log("Disable !",disable);
-    
+  const handleDelete = async () => {    
     const data = {
       status: status === "active" ? "disabled" : "active",
     };
@@ -131,7 +129,7 @@ function DoctorsTable(props) {
       render: (item) => <StatusBadge status={item} />,
       filters: [
         { text: "active", value: "active" },
-        { text: "inactive", value: "inactive" },
+        { text: "disabled", value: "disabled" },
       ],
       onFilter: (value, record) => record.status.startsWith(value),
       filterSearch: true,

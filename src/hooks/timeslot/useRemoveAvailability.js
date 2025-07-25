@@ -22,8 +22,6 @@ const useRemoveAvailability = () => {
       queryClient.invalidateQueries(["availabilities"]);
     },
     onError: (error, id, context) => {
-      console.log(error);
-
       const errotMessage =
         error?.response?.data?.message || "Failed to delete availability";
       // Rollback if there is an error

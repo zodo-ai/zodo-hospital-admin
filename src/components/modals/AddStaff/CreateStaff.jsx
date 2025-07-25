@@ -125,8 +125,8 @@ function CreateStaff(props) {
                 name="phone"
                 label="Phone Number"
                 validation={{ required: "Phone number is required" }}
-                placeholder="Enter phone number"
-                type="text"
+                placeholder=""
+                type="phone"
               />
             </div>
           </div>

@@ -7,7 +7,19 @@ const PatientChart = (props) => {
   const chartRef = React.useRef(null);
   const chartInstanceRef = React.useRef(null);
   const countsPeryear = data?.map((item) => item.count);
-  const categories = data?.map((item)=> item.month)
+  
+  // Format categories for better responsiveness
+  const categories = data?.map((item) => {
+    const month = item.month;
+    // Convert "January 2024" to "Jan '24"
+    if (month.includes(' ')) {
+      const [monthName, year] = month.split(' ');
+      const shortMonth = monthName.substring(0, 3);
+      const shortYear = year.substring(2);
+      return `${shortMonth} '${shortYear}`;
+    }
+    return month;
+  });
   
   useEffect(() => {
     if (chartInstanceRef.current) {

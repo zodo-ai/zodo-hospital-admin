@@ -8,14 +8,11 @@ import { useAuth } from "../../../hooks/useAuth";
 import ButtonSerchHero from "../../heros/ButtonSerchHero";
 import SideModal from "../../modals/SideModal";
 import Overview from "../../modals/AddDoctor/Overview";
-import { useWeeks } from "../../../hooks/timeslot/useWeeks";
 
 function DoctorManage() {
   const { hospitalId } = useAuth();
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const { data: weeks } = useWeeks();
-    console.log("Weeks", weeks);
   const breadCrumpData = [
     {
       name: "Doctors",
@@ -54,8 +51,12 @@ function DoctorManage() {
         </div>
       </div>
 
-      <SideModal show={show} handleClose={handleCloseModal} title="Doctor Profile">
-        <Overview handleClose={handleCloseModal}/>
+      <SideModal
+        show={show}
+        handleClose={handleCloseModal}
+        title="Doctor Profile"
+      >
+        <Overview handleClose={handleCloseModal} />
       </SideModal>
     </Layout>
   );

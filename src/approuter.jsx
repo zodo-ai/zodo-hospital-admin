@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/login";
@@ -25,8 +24,6 @@ import PublicRoute from "./components/PublicRoute";
 import { ToastContainer } from "react-toastify";
 import Finance from "./components/pages/Finance/Finance";
 import Departments from "./components/pages/Hospitals/Departments";
-import ViewHospitalService from "./components/pages/Hospitals/ViewHospitalService";
-import StaffDetails from "./components/pages/Staff/StaffDetails";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import VerifyOtp from "./components/pages/login/Verify";
 //Accounts
@@ -80,12 +77,11 @@ const Approuter = () => {
             <Route path="/doctor-manage" element={<DoctorManage />} />
             <Route path="/doctor-manage/:id" element={<DoctorDetails />} />
             <Route path="/staff-manage" element={<StaffManage />} />
-            <Route path="/staff-manage/:id" element={<StaffDetails />} />
             <Route path="/hospital/services" element={<HospitalServices />} />
-            <Route
+            {/* <Route
               path="/hospital/services/:id"
               element={<ViewHospitalService />}
-            />
+            /> */}
             <Route path="/hospital/departments" element={<Departments />} />
             <Route path="/hospital/edit" element={<EditHospital />} />
             <Route path="/finance" element={<Finance />} />

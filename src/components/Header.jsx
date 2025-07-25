@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { baricon1, user_profile, mainLogo } from "./imagepath";
+import { baricon1, user_profile, mainLogo, logout_01 } from "./imagepath";
 import { useAuth } from "../hooks/useAuth";
 import { useViewHospital } from "../hooks/hospital/useViewHospital";
 import ConfirmLogout from "./modals/ConfirmLogout";
@@ -94,13 +94,54 @@ const Header = () => {
                 <img src={user?.profile_picture || user_profile} alt="Admin" />
               </span>
             </Link>
-            <div className="dropdown-menu">
-              <Link className="dropdown-item">{hospital?.name}</Link>
-              <Link
-                className="dropdown-item"
-                // to="/login"
-                onClick={() => setIsOpen(true)}
+            <div className="dropdown-menu" style={{ width: "250px" }}>
+              <div
+                className="dropdown-item d-flex align-items-center"
+                style={{
+                  fontWeight: "600",
+                  borderBottom: "1px solid #eee",
+                  paddingBottom: "8px",
+                  marginBottom: "8px",
+                  whiteSpace: "normal",
+                  wordWrap: "break-word",
+                }}
               >
+                {hospital?.logo ? (
+                  <img
+                    src={hospital.logo}
+                    alt="Hospital"
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px",
+                      borderRadius: "4px",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "24px",
+                      height: "24px",
+                      marginRight: "8px",
+                      borderRadius: "4px",
+                      backgroundColor: "#f0f0f0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "10px",
+                      color: "#999",
+                    }}
+                  >
+                    <i className="fas fa-hospital"></i>
+                  </div>
+                )}
+                <span style={{ flex: 1 }}>{hospital?.name}</span>
+              </div>
+              <Link className="dropdown-item" onClick={() => setIsOpen(true)}>
+                <span className="menu-side me-2">
+                  <img src={logout_01} alt="" />
+                </span>{" "}
                 Logout
               </Link>
             </div>
@@ -132,7 +173,5 @@ const Header = () => {
     </div>
   );
 };
-
-
 
 export default Header;

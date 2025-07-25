@@ -13,7 +13,7 @@ function Departments() {
   const [searchTerm, setSearchTerm] = useState("");
   const query = searchTerm ? `name=${searchTerm}` : "";  
   const { hospitalId } = useAuth();
-  const { data: departmentsList } = useDepartmentList(hospitalId, query);  
+  const { data: departmentsList, isLoading } = useDepartmentList(hospitalId, query);  
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -53,7 +53,7 @@ function Departments() {
             handleSearchterm={handleSearch}
             buttonTitle="Add Department"
           />
-          <Department departmentList={departmentsList ?? []} />
+          <Department departmentList={departmentsList ?? []} loading={isLoading}/>
         </div>
       </div>
       <CenteredModal

@@ -16,7 +16,6 @@ const EditProfile = () => {
     { value: 3, label: "Female" },
   ]);
   const onChange = (date, dateString) => {
-    // console.log(date, dateString);
   };
 
   return (

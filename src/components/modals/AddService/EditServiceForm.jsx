@@ -25,7 +25,6 @@ function EditServiceForm(props) {
       strike_through_price: data.strikePrice,
       image: fileURL,
       daily_booking_count: parseInt(data.appointmentLimit),
-
     };
 
     await mutate(
@@ -50,7 +49,7 @@ function EditServiceForm(props) {
         price: service.price,
         strikePrice: service.strike_through_price,
         message: service.description,
-        appointmentLimit: service?.daily_booking_count
+        appointmentLimit: service?.daily_booking_count,
       });
     }
   }, [service, methods]);
@@ -119,15 +118,6 @@ function EditServiceForm(props) {
         </div>
 
         <div className="form-group d-flex justify-content-end pt-3">
-          <button
-            to="#"
-            //   data-bs-toggle="modal"
-            //   data-bs-target="#delete_invoices_details"
-            className="hospital-draft-btn text-primary pt-1 pb-1 ps-3 pe-3 rounded"
-            onClick={() => handleClose()}
-          >
-            Cancel
-          </button>
           <button
             to="#"
             //   data-bs-toggle="modal"

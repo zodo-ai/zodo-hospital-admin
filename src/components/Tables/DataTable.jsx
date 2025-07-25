@@ -2,11 +2,9 @@ import { Table } from "antd";
 import { onShowSizeChange, itemRender } from "../Pagination";
 import PropTypes from "prop-types";
 const DataTable = (props) => {
-  const { columns, dataSource, loading } = props;
-  console.log("DATA ",dataSource);
-  
+  const { columns, dataSource, loading } = props;  
   return (
-    <div className="table-responsive">
+    <div className="table-responsive" style={{minHeight:'300px', background:'white'}}>
       <Table
         pagination={dataSource.length > 10 ? {
           total: dataSource.length,
@@ -17,8 +15,6 @@ const DataTable = (props) => {
         columns={columns}
         dataSource={dataSource || []}
         loading={loading}
-        // scroll={{ y: 300 }}
-        
         // rowSelection={rowSelection}
         // rowKey={(record) => record.id}
       />

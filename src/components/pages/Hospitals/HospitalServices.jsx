@@ -27,7 +27,7 @@ function HospitalServices() {
   const [searchTerm, setSearchTerm] = useState("");
   const query = searchTerm ? `name=${searchTerm}` : "";
   
-  const { data: servicesList } = useHospitalServices(hospitalId, query);
+  const { data: servicesList, isLoading } = useHospitalServices(hospitalId, query);
   const handleShow = () => {
     setShow(true);
   };
@@ -56,7 +56,7 @@ function HospitalServices() {
             handleSearchterm={handleSearch}
             buttonTitle="Add Service"
           />
-          <ServicesList servicesData={servicesList} />
+          <ServicesList servicesData={servicesList} isLoading={isLoading}/>
         </div>
       </div>
       <CenteredModal

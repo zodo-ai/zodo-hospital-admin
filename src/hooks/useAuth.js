@@ -26,14 +26,12 @@ export const AuthProvider = ({ children }) => {
   const clearAccessToken = () => {
     setAccessToken(null);
   };
-  // console.log("User data", userData);
 
   // Fetch user data when the component mounts
   const fetchUserData = async () => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token"); // Get the token from local storage
     if (token) {
       const user = await getUser(); // Fetch user data if token exists
-      // console.log("User data from local storage", user);
       setUser(user?.data?.data);
       const hospitalId = user?.data?.data?.hospital_id;
       if (hospitalId) {
@@ -69,34 +67,6 @@ export const AuthProvider = ({ children }) => {
       setValidationError(errorMessage || "Something went wrong");
     },
   });
-
-  // Login mutation
-  // const getUserMutation = () => {
-  //   return useQuery({
-  //     queryKey: ["user"], // Unique query key
-  //     queryFn: () => getUser(),
-  //   });
-  // };
-
-  // Logout mutation
-  // const logoutMutation = useMutation({
-  //   mutationFn: logout,
-  //   onSuccess: () => {
-  //     localStorage.removeItem("token");
-  //     setUser(null);
-  //     queryClient.setQueryData(["user"], null);
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token"); // Get the token from local storage
-  //   console.log("Token from local storage", token);
-
-  //   if (token) {
-  //     setAccessToken(token);
-  //     getUserMutation(); // Fetch user data if token exists
-  //   }
-  // }, []);
   return (
     <AuthContext.Provider
       value={{
