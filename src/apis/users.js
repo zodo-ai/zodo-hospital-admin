@@ -7,7 +7,7 @@ export const addUser = async (userData) => {
 
 export const getHospitalStaffs = async (hospitalId) => {
   const response = await apiClient.get(
-    `/users?hospital_id=${hospitalId}`
+    `/users?hospital_id=${hospitalId}&user_type=hsAdmin,staff`
   );
   return response?.data?.data || [];
 };

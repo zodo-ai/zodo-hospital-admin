@@ -84,7 +84,6 @@ function AppointmentTable(props) {
         { text: "accepted", value: "accepted" },
         { text: "started", value: "started" },
         { text: "rejected", value: "rejected" },
-
       ],
       onFilter: (value, record) => record.status.startsWith(value),
       filterSearch: true,
@@ -98,7 +97,7 @@ function AppointmentTable(props) {
       title: "ACTION",
       dataIndex: "actions",
       render: (_item, record) => {
-        return (
+        return record.type !== "fast_tag" ? (
           <div style={{ display: "flex", gap: 8, paddingLeft: "20px" }}>
             <Link
               to="#"
@@ -111,6 +110,8 @@ function AppointmentTable(props) {
               <img src={printericon} alt="Print Icon" width={17} />
             </Link>
           </div>
+        ) : (
+          <div className="text-center">N/A</div>
         );
       },
     },

@@ -15,9 +15,11 @@ function RequestedAppointments() {
     dateQuery
   );
 
+
+
   const requestedList =
     appointmentsList &&
-    appointmentsList?.filter((item) => item.timeSlot === null);
+    appointmentsList?.filter((item) => item.timeSlot === null && item.type !== "fast_tag");
 
   const [show, setShow] = useState(false);
   const [requestDetails, setRequestDetails] = useState({});

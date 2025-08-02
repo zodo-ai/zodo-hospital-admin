@@ -38,7 +38,7 @@ function DoctorManage() {
   return (
     <Layout activeClassName="doctor-manage" id="menu-item4" id1="menu-items4">
       <div className="page-wrapper">
-        <div className="content">
+        <div className="content pb-3">
           <Breadcrumb data={breadCrumpData} />
           <BasicHero title="Doctor Details" />
           <ButtonSerchHero

@@ -133,7 +133,6 @@ function Availability({ selectedDoctor }) {
       <Form.Select
         value={value}
         onChange={(e) => handleChange("start", e.target.value, slotId)}
-        disabled={selectedDoctor?.auto_booking_enabled}
       >
         {options.map((t) => (
           <option key={t}>{t}</option>
@@ -151,7 +150,6 @@ function Availability({ selectedDoctor }) {
       <Form.Select
         value={value}
         onChange={(e) => handleChange("end", e.target.value, slotId)}
-        disabled={selectedDoctor?.auto_booking_enabled}
       >
         {options.map((t) => (
           <option key={t}>{t}</option>
@@ -189,7 +187,6 @@ function Availability({ selectedDoctor }) {
                       style={{ width: "30px", height: "30px" }}
                       onClick={() => handleRemoveSlot(item.id)}
                       title="Remove Slot"
-                      disabled={selectedDoctor?.auto_booking_enabled}
                     >
                       &minus;
                     </button>
@@ -203,7 +200,6 @@ function Availability({ selectedDoctor }) {
               style={{ width: "30px", height: "30px" }}
               onClick={() => handleAddSlot(day)}
               title="Add Slot"
-              disabled={selectedDoctor?.auto_booking_enabled}
             >
               +
             </Button>

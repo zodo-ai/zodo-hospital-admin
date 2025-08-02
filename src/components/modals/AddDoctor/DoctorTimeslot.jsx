@@ -6,8 +6,8 @@ import ComponentLoader from "../../loaders/ComponentLoader";
 
 function DoctorTimeslot(props) {
   const { selectedDoctor } = props;
-  const { mutate } = useAutoSloting();
-  const { data: doctor, isLoading } = useDoctorView(selectedDoctor);
+  const { mutate, isLoading } = useAutoSloting();
+  const { data: doctor } = useDoctorView(selectedDoctor);
 
   const handleSlot = async () => {
     const data = {
@@ -34,9 +34,12 @@ function DoctorTimeslot(props) {
           </div>
         </div>
       </div>
-      {doctor?.auto_booking_enabled ||
-        (!isLoading && <Availability selectedDoctor={doctor} />)}
-      {isLoading && <ComponentLoader />}
+
+      {isLoading ? (
+        <ComponentLoader />
+      ) : (
+        <Availability selectedDoctor={doctor} />
+      )}
     </div>
   );
 }

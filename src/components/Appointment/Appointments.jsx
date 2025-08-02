@@ -25,6 +25,10 @@ function Appointments() {
     (item) => item.status === "completed"
   );
   // const completed =
+
+
+
+  
   const appointmentDataTab = [
     {
       id: "allAppointments",

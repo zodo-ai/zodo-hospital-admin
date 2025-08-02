@@ -34,7 +34,7 @@ function StaffManage() {
   };
   return (
     <Layout activeClassName="staff-manage" id="menu-item5" id1="menu-items5">
-      <div className="page-wrapper">
+      <div className="page-wrapper pb-3">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <BasicHero title="Staff Details" />
