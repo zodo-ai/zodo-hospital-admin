@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import Availability from "./Timeslots/Availability";
 import { useDoctorView } from "../../../hooks/doctors/useDoctorView";
 import { useAutoSloting } from "../../../hooks/timeslot/useAutoSloting";
+import ComponentLoader from "../../loaders/ComponentLoader";
 
 function DoctorTimeslot(props) {
   const { selectedDoctor } = props;
   const { mutate } = useAutoSloting();
-  const { data:doctor } = useDoctorView(selectedDoctor)
-  
-  
+  const { data: doctor, isLoading } = useDoctorView(selectedDoctor);
+
   const handleSlot = async () => {
     const data = {
       enabled: !doctor?.auto_booking_enabled,
@@ -34,9 +34,9 @@ function DoctorTimeslot(props) {
           </div>
         </div>
       </div>
-      <Availability selectedDoctor={doctor} />
-      {/* <SlotManager selectedDoctor={selectedDoctor}/> */}
-      {/* <ModalTabs tabData={tabData} /> */}
+      {doctor?.auto_booking_enabled ||
+        (!isLoading && <Availability selectedDoctor={doctor} />)}
+      {isLoading && <ComponentLoader />}
     </div>
   );
 }

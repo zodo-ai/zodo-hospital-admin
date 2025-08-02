@@ -1,4 +1,4 @@
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { useWeeks } from "../../../../hooks/timeslot/useWeeks";
 import PropTypes from "prop-types";
 import { useAddAvailability } from "../../../../hooks/timeslot/useAddAvailability";
@@ -13,11 +13,10 @@ function Availability({ selectedDoctor }) {
   const { mutate: updateAvailability } = useUpdateAvailability();
   const { mutate: deleteAvailability } = useRemoveAvailability();
   const [slotTimes, setSlotTimes] = useState({});
-
-  const { data: weeks } = useWeeks();
-  if (!weeks) return <div>Loading weeks...</div>;
-
-  const week_ids = weeks.map((week) => week.id);
+  const { data: weeks = [] } = useWeeks();
+  const week_ids = Array.isArray(weeks)
+    ? (weeks || []).map((week) => week.id)
+    : [];
   const consultationDuration = selectedDoctor?.consultation_duration;
   const generateTimeOptions = () => {
     const times = [];
@@ -128,6 +127,8 @@ function Availability({ selectedDoctor }) {
       ? times.filter((t) => t >= minStartTime)
       : times; // show all for first slot
 
+    if (!weeks) return <div>Loading weeks...</div>;
+
     return (
       <Form.Select
         value={value}
@@ -160,54 +161,55 @@ function Availability({ selectedDoctor }) {
   };
 
   return (
-    <div className="container my-2">
+    <div className="container py-2">
       {weeks.map((day, index) => (
-        <div key={day.id} className="mb-4 border-bottom pb-3 d-flex">
-          <div style={{ width: "10%" }}>
+        <Row
+          key={day.id}
+          className="mb-4 border-bottom pb-3 flex-column flex-md-row align-items-start"
+        >
+          {/* Day Name */}
+          <Col xs={12} md={2} className="mb-2 mb-md-0">
             <strong>{day.name}</strong>
-          </div>
-          <div className="w-75">
-            {sortedAsc(availability[index]?.[0]?.availabilities || [])?.map(
+          </Col>
+
+          {/* Slots and add button: make horizontally scrollable on small */}
+          <Col xs={12} md={10} className="overflow-auto">
+            {sortedAsc(availability[index]?.[0]?.availabilities || []).map(
               (item, slotIndex) => (
                 <Row key={item.id} className="align-items-center mb-2">
-                  <Col xs={3}>
+                  <Col xs={5} sm={3} md={3} lg={3} xl={2}>
                     {renderStartForm(item, day, index, slotIndex, item.id)}
                   </Col>
-                  <Col xs={3}>{renderEndForm(item, day, item.id)}</Col>
-                  <Col xs={1}>
+                  <Col xs={5} sm={3} md={3} lg={3} xl={2}>
+                    {renderEndForm(item, day, item.id)}
+                  </Col>
+                  <Col xs={2} sm={1} md={1} lg={1} xl={1}>
                     <button
-                      className="btn-outline-danger rounded-circle"
+                      className="btn btn-outline-danger rounded-circle p-0"
                       style={{ width: "30px", height: "30px" }}
                       onClick={() => handleRemoveSlot(item.id)}
                       title="Remove Slot"
                       disabled={selectedDoctor?.auto_booking_enabled}
                     >
-                      −
+                      &minus;
                     </button>
                   </Col>
                 </Row>
               )
             )}
-            <button
-              className="btn-outline-primary rounded-circle"
+            <Button
+              variant="outline-primary"
+              className="rounded-circle p-0"
               style={{ width: "30px", height: "30px" }}
               onClick={() => handleAddSlot(day)}
               title="Add Slot"
               disabled={selectedDoctor?.auto_booking_enabled}
             >
               +
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Col>
+        </Row>
       ))}
-      {/* <div className="d-flex justify-content-between mt-4">
-        <Button variant="outline-primary" className="ps-5 pe-5">
-          Back
-        </Button>
-        <Button variant="primary" className="ps-5 pe-5">
-          Edit Now
-        </Button>
-      </div> */}
     </div>
   );
 }

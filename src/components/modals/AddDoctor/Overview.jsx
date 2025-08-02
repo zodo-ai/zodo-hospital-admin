@@ -55,7 +55,7 @@ function Overview(props) {
         council_name: data.councilName,
         joining_date: data?.joiningDate,
       },
-      department_id: data?.departments?.map((item) => item.value),
+      department_ids: data?.departments?.map((item) => item.value),
       documents: [],
       consultation_duration: parseInt(data?.duration),
       work_start_date: data?.workstartDate,

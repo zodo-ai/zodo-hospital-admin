@@ -11915,7 +11915,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 .doctor-timeslot{
   /* height: 74.9vh; */
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .timeslot-container{

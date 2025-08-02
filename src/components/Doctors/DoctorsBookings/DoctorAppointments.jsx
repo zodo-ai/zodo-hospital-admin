@@ -53,10 +53,11 @@ function DoctorAppointments({ doctorDetails }) {
                   </span>
                 )}
               </small>
-              <div>
+              {parseInt(doctorDetails.total_rating) > 0 &&<div>
                 {[...Array(5)].map((_, index) => (
                   <i
                     key={index}
+                    style={{ fontSize:'0.8rem' }}
                     className={`fa fa-star ${
                       index < parseInt(doctorDetails.total_rating)
                         ? "text-warning"
@@ -64,7 +65,7 @@ function DoctorAppointments({ doctorDetails }) {
                     }`}
                   ></i>
                 ))}
-              </div>
+              </div>}
             </div>
           </div>
           <div className="mt-md-0 mt-3">

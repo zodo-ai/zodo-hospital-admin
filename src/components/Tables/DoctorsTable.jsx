@@ -65,7 +65,7 @@ function DoctorsTable(props) {
   };
   const columns = [
     {
-      title: "Doctor Name",
+      title: "DOCTOR NAME",
       dataIndex: "name",
       sorter: (a, b) => a.name.localeCompare(b.name),
       render: (item, record) => (
@@ -86,11 +86,11 @@ function DoctorsTable(props) {
       ),
     },
     {
-      title: "Phone",
+      title: "PHONE NUMBER",
       dataIndex: "phone_number",
     },
     {
-      title: "Departments",
+      title: "DEPARTMENTS",
       dataIndex: "departments",
 
       key: "departments",
@@ -105,7 +105,7 @@ function DoctorsTable(props) {
       ),
     },
     {
-      title: "Pricing",
+      title: "PRICING",
       dataIndex: "pricing",
       // sorter: (a, b) => a.pricing.length - b.pricing.length,
       sorter: (a, b) => {
@@ -114,7 +114,7 @@ function DoctorsTable(props) {
       render: (item) => <div>₹{item}</div>,
     },
     {
-      title: "Joining Date",
+      title: "JOINING DATE",
       dataIndex: "work_start_date",
       render: (item) => <div>{item ? formatToDate(item) : "N/A"}</div>,
       sorter: (a, b) => {
@@ -123,7 +123,7 @@ function DoctorsTable(props) {
       // sorter: (a, b) => a.joiningDate.length - b.joiningDate.length,
     },
     {
-      title: "Status",
+      title: "STATUS",
       dataIndex: "status",
       // sorter: (a, b) => a.pricing.length - b.pricing.length,
       render: (item) => <StatusBadge status={item} />,

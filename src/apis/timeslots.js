@@ -2,7 +2,7 @@ import apiClient from "./apiClient";
 
 export const getWeeks = async () => {
   const response = await apiClient.get(`/weeks`);
-  return response.data || [];
+  return response?.data || [];
 };
 
 export const getWeekAvailability = async (doctor_id, week_id) => {

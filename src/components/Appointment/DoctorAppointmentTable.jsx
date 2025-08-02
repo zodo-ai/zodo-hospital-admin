@@ -6,28 +6,34 @@ import StatusBadge from "../assests/StatusBadge";
 import { Link } from "react-router-dom";
 import { printericon } from "../imagepath";
 import { generateCaseSheetPDF } from "../../utils/pdfGenerator";
+import { formatToDate } from "../configs/formatToDate";
 
 function DoctorAppointmentTable(props) {
-    const { appointmentList, loading, handleDate, id } = props;
-      // const [show, setShow] = useState(false);
-      // const [prescriptionUrl, setPrescriptionUrl] = useState("");
-      // const handleClose = () => {
-      //   setShow(false);
-      // };
-      // const handleView = (url) => {
-      //   // Logic to handle view action
-      //   setPrescriptionUrl(url);
-      //   // Open the modal to show the prescription
-      //   setShow(true);
-      // };
+  const { appointmentList, loading, handleDate, id } = props;
+  // const [show, setShow] = useState(false);
+  // const [prescriptionUrl, setPrescriptionUrl] = useState("");
+  // const handleClose = () => {
+  //   setShow(false);
+  // };
+  // const handleView = (url) => {
+  //   // Logic to handle view action
+  //   setPrescriptionUrl(url);
+  //   // Open the modal to show the prescription
+  //   setShow(true);
+  // };
   const columns = [
     {
-      title: "Booking ID",
+      title: "BOOKING ID",
       dataIndex: "booking_id",
       // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
     },
     {
-      title: "Patient Name",
+      title: "TYPE",
+      dataIndex: "type",
+      // sorter: (a, b) => a.type.length - b.type.length,
+    },
+    {
+      title: "PATIENT NAME",
       dataIndex: "patientname",
       // sorter: (a, b) => a.patientname.length - b.patientname.length,
       render: (_item, record) => (
@@ -35,50 +41,40 @@ function DoctorAppointmentTable(props) {
       ),
     },
     {
-      title: "Type",
-      dataIndex: "type",
-      // sorter: (a, b) => a.type.length - b.type.length,
-    },
-    {
-      title: "Time",
+      title: "TIME SLOT",
       dataIndex: "timeSlot",
       // sorter: (a, b) => a.time.length - b.time.length,
       render: (_item, record) => (
-        <div>{formatTime(record?.timeSlot) ?? "unassigned"}</div>
+        <div>{_item ? formatTime(record?.timeSlot) : "unassigned"}</div>
       ),
     },
     {
-      title: <div className="text-center">Status</div>,
+      title: "APPOINTMENT DATE",
+      dataIndex: "appointmentDate",
+      render: (item) => <div>{formatToDate(item)}</div>,
+      sorter: (a, b) => {
+        return new Date(a.appointmentDate) - new Date(b.appointmentDate);
+      },
+    },
+    {
+      title: "STATUS",
       dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
-      render: (item) => <div className="d-flex justify-content-center"><StatusBadge status={item} /></div>,
+      // filters: [
+      //   { text: "completed", value: "completed" },
+      //   { text: "accepted", value: "accepted" },
+      //   { text: "started", value: "started" },
+      //   { text: "rejected", value: "rejected" },
+      // ],
+      // onFilter: (value, record) => record.status.startsWith(value),
+      // filterSearch: true,
+      render: (item) => (
+        <div>
+          <StatusBadge status={item} />
+        </div>
+      ),
     },
     {
-      title: "Amount",
-      dataIndex: "amount",
-      // sorter: (a, b) => a.status.length - b.status.length,
-      render: (_item) => _item && <div>₹ {_item}</div>,
-    },
-    // {
-    //   title: "Prescription",
-    //   dataIndex: "prescription",
-    //   render: (_item, record) => {
-    //     return record?.prescriptionUrl ? (
-    //       <div style={{ display: "flex", gap: 8, paddingLeft: "20px" }}>
-    //         <Link to onClick={() => handleView(record?.prescriptionUrl)}>
-    //           View
-    //         </Link>
-    //         <Link to>
-    //           <img src={pdficon} alt="Pdf Icon" width={17} />
-    //         </Link>
-    //       </div>
-    //     ) : (
-    //       <div style={{ paddingLeft: "25px" }}>N/A</div>
-    //     );
-    //   },
-    // },
-    {
-      title: "Actions",
+      title: "ACTION",
       dataIndex: "actions",
       render: (_item, record) => {
         return (
@@ -97,11 +93,10 @@ function DoctorAppointmentTable(props) {
         );
       },
     },
-    
   ];
   return (
     <div>
-      <DateSearchHero handleDate={handleDate} type="doctor-booking" id={id}/>
+      <DateSearchHero handleDate={handleDate} type="doctor-booking" id={id} />
       <DataTable
         columns={columns}
         dataSource={appointmentList ?? []}
@@ -118,7 +113,7 @@ DoctorAppointmentTable.propTypes = {
   appointmentList: PropTypes.node,
   loading: PropTypes.bool,
   handleDate: PropTypes.func,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
 
 export default DoctorAppointmentTable;

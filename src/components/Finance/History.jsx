@@ -103,7 +103,7 @@ function History() {
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Status",
+      title: "STATUS",
       dataIndex: "status",
       filters: [
         { text: "completed", value: "completed" },
