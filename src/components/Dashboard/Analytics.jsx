@@ -5,14 +5,6 @@ import { useAuth } from "../../hooks/useAuth";
 function Analytics(props) {
   const { id } = props;
   const { hospitalId } = useAuth();
-  // const [query,setQuery] = useState("");
-  // const [selectedOption, setSelectedOption] = useState(
-  //   bookingType ? bookingType[0] : []
-  // );
-
-  // useEffect(() => {
-  //   setQuery(`type=${selectedOption?.value}`)
-  // }, [selectedOption])
 
   const { data } = useAnalyticsData(hospitalId);
 
