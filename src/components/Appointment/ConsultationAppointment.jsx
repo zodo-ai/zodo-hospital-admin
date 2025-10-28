@@ -286,9 +286,9 @@ function ConsultationAppointment({ handleClose }) {
           <div className="col">
             <TextArea
               name="address"
-              label="Address"
-              validation={{ required: "Address is required" }}
-              placeholder="Enter Address"
+              label="Place Of Residence"
+              validation={{ required: "Place of residence is required" }}
+              placeholder="Enter place of residence"
             />
           </div>
         </div>

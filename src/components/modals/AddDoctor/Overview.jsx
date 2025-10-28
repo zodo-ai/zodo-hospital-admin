@@ -214,8 +214,8 @@ function Overview(props) {
             <div className="form-group col-md-6">
               <InputField
                 name="joiningDate"
-                label="Joining Date"
-                placeholder="Joining date"
+                label="Graduation Date"
+                placeholder="Graduation date"
                 type="date"
               />
             </div>

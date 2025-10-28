@@ -26,7 +26,7 @@ function EditHospitalForm() {
   const { data: districts, isLoading: districtLoading } = useGetDistrict();
   const districtOptions = districts?.map((item) => ({
     label: item.name,
-    value: item.name,
+    value: item.id,
   }));
   const { data: hospitalDocuments, isLoading: documentLoading } =
     useHospitalDocuments(hospitalId);
@@ -59,13 +59,13 @@ function EditHospitalForm() {
       setFileURL(hospitalDetails?.logo || "");
       const fastTag = hospitalDetails?.fastTag?.enabled;
       setToggleFasttag(fastTag);
-      const district = hospitalDetails?.address?.district;
-      const billingDistrict = hospitalDetails?.billing_address?.district;
-      const districtOption = { label: district, value: district };
+      const district = districts?.find((item)=> item.id === hospitalDetails?.address?.district);
+      const billingDistrict = districts?.find((item)=> item.id === hospitalDetails?.billing_address?.district);
+      const districtOption = { label: district?.name, value: district?.id };      
       const billingDistrictOption = {
-        label: billingDistrict,
-        value: billingDistrict,
-      };
+        label: billingDistrict?.name,
+        value: billingDistrict?.id,
+      };      
       methods.reset({
         hospitalName: hospitalDetails?.name,
         email: hospitalDetails?.contact_details?.email,
@@ -88,7 +88,6 @@ function EditHospitalForm() {
         upiid: hospitalDetails?.bank_details?.upi_id,
         billingAccountHoldername: hospitalDetails?.billing_address?.lineOne,
         fasttagPrice: hospitalDetails?.fastTag?.price,
-
         billingStreet: hospitalDetails?.billing_address?.city,
         billingAddress: hospitalDetails?.billing_address?.lineTwo,
         billingTown: hospitalDetails?.billing_address?.city,
@@ -246,7 +245,7 @@ function EditHospitalForm() {
           <InputField
             name="gstnumber"
             label="GST Number"
-            validation={{ required: "GST Number is required" }}
+            // validation={{ required: "GST Number is required" }}
             placeholder="GST Number"
             type="text"
           />

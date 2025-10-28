@@ -11678,7 +11678,12 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   position: absolute;
   right: 17px;
   top: 26%;
+}
 
+.toggle-password-staff {
+  position: absolute;
+  right: 10px;
+  top: 24%;
 }
 
 /*-----------------

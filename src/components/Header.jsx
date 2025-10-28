@@ -91,7 +91,7 @@ const Header = () => {
                 <span>{userRole}</span>
               </div>
               <span className="user-img">
-                <img src={user?.profile_picture || user_profile} alt="Admin" />
+                <img src={user?.profile_picture || hospital?.logo || user_profile} alt="Admin" />
               </span>
             </Link>
             <div className="dropdown-menu" style={{ width: "250px" }}>

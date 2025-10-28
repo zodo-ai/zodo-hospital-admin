@@ -64,7 +64,7 @@ function Hero() {
                 <span>
                   <img src={adduser} alt="create" />
                 </span>{" "}
-                <span className="ps-1">Create a Staff</span>
+                <span className="ps-1">Create Staff</span>
               </Link>
               <div className="dropdown-divider" />
               <Link
@@ -75,7 +75,7 @@ function Hero() {
                 <span>
                   <img src={adduser} alt="create" />
                 </span>{" "}
-                <span className="ps-1">Create a Admin Staff</span>
+                <span className="ps-1">Create Admin Staff</span>
               </Link>
               <div className="dropdown-divider" />
               <Link
@@ -86,7 +86,7 @@ function Hero() {
                 <span>
                   <img src={adduser} alt="create" />
                 </span>{" "}
-                <span className="ps-1">Create a Doctor</span>
+                <span className="ps-1">Create Doctor</span>
               </Link>
               {/* <div className="dropdown-divider" />
               <Link

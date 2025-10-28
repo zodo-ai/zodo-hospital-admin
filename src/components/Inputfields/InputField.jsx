@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
+import { Eye, EyeOff } from "react-feather";
 import { useFormContext } from "react-hook-form";
 
 function InputField(props) {
@@ -19,7 +20,11 @@ function InputField(props) {
     formState: { errors },
     setValue,
   } = useFormContext();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   //  Block value less than minValue
   const handleInput = (e) => {
     const value = e.target.value;
@@ -32,7 +37,7 @@ function InputField(props) {
 
   // Handle phone number input - only allow digits and limit to 10 characters
   const handlePhoneInput = (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    let value = e.target.value.replace(/\D/g, ""); // Remove non-digits
     if (value.length > 10) {
       value = value.slice(0, 10); // Limit to 10 digits
     }
@@ -47,16 +52,16 @@ function InputField(props) {
         ...validation,
         pattern: {
           value: /^[6-9]\d{9}$/,
-          message: "Please enter a valid 10-digit Indian mobile number"
+          message: "Please enter a valid 10-digit Indian mobile number",
         },
         minLength: {
           value: 10,
-          message: "Phone number must be 10 digits"
+          message: "Phone number must be 10 digits",
         },
         maxLength: {
           value: 10,
-          message: "Phone number must be 10 digits"
-        }
+          message: "Phone number must be 10 digits",
+        },
       };
     }
     return validation;
@@ -105,7 +110,51 @@ function InputField(props) {
           maxLength="10"
           onInput={handlePhoneInput}
         />
+      ) : type === "password" ? (
+        // <input
+        //   id={name}
+        //   name={name}
+        //   type={type}
+        //   placeholder={placeholder}
+        //   disabled={disabled}
+        //   className={`form-control ${errors?.[name] ? "is-invalid" : ""}`}
+        //   {...register(name, validation)}
+        //   defaultValue={defaultValue}
+        //   pattern={pattern}
+        //   min={minValue}
+        //   onInput={handleInput}
+        // />
+        <div style={{position:'relative'}}>
+        <input
+          type={!passwordVisible ? "password" : ""}
+          placeholder={placeholder}
+          className={`form-control pass-input ${
+            errors !== undefined && errors["password"] ? "is-invalid" : ""
+          }`}
+          {...register(name, validation)}
+          // value={password}
+          // onChange={(e) => setPassword(e.target.value)}
+          defaultValue={defaultValue}
+          pattern={pattern}
+          onInput={handleInput}
+        />
+        {errors !== undefined && errors["password"] ? null : (
+          <span
+            className="toggle-password-staff"
+            onClick={togglePasswordVisibility}
+           
+          >
+            {!passwordVisible ? (
+              <EyeOff className="react-feather-custom"/>
+            ) : (
+              <Eye className="react-feather-custom" />
+            )}
+          </span>
+        )}
+        </div>
+
       ) : (
+        
         <input
           id={name}
           name={name}
