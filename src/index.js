@@ -19,6 +19,8 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./hooks/useAuth.js";
 import { queryClient } from "./apis/queryClient.js";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,3 +30,5 @@ root.render(
     </AuthProvider>
   </QueryClientProvider>
 );
+serviceWorkerRegistration.register();
+
