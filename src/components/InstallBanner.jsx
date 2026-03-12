@@ -8,6 +8,8 @@ const InstallBanner = () => {
   const [isFirefox, setIsFirefox] = useState(false);
 
   useEffect(() => {
+    const dismissed = localStorage.getItem("installBannerDismissed");
+    if (dismissed) return;
     setShow(true);// 👈 DEV MODE: force show banner
 
     const ua = navigator.userAgent.toLowerCase();
@@ -111,7 +113,10 @@ const InstallBanner = () => {
             <button
               className="btn btn-secondary"
               style={{ borderRadius: "25px", padding: "8px 26px" }}
-              onClick={() => setShow(false)}
+              onClick={() => {
+                localStorage.setItem("installBannerDismissed", "true");
+                setShow(false);
+              }}
             >
               Cancel
             </button>
