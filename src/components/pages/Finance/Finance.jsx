@@ -7,6 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useHospitalAnalytics } from "../../../hooks/hospital/useHospitalAnalytics";
 import FullscreenLoader from "../../loaders/FullscreenLoader";
 import Settlements from "../../Finance/Settlements";
+import DoctorsRevenue from "../../Finance/DoctorsRevenue";
 function Finance() {
   const { hospitalId } = useAuth();
   const { data: hospitalAnalytics, isLoading } =
@@ -33,6 +34,12 @@ function Finance() {
       content: <Settlements />,
       link: "settlements",
     },
+    {
+    id: "doctors",
+    title: "Doctors",
+    content: <DoctorsRevenue />,
+    link: "doctors",
+  },
   ];
   return (
     <Layout activeClassName="finance" id="menu-item5" id1="menu-items5">
