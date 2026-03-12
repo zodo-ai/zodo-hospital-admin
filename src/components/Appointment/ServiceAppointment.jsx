@@ -14,6 +14,7 @@ import { useHospitalServices } from "../../hooks/hospital-services/useHospitalSe
 import { useCreteServiceAppointment } from "../../hooks/appointments/useCreateServiceAppointment";
 import { useEffect, useState } from "react";
 import { useViewService } from "../../hooks/hospital-services/useViewService";
+import PatientSearchField from "../Inputfields/PatientSearchField";
 function ServiceAppointment({ handleClose }) {
   const { hospitalId } = useAuth();
   const { mutate: createAppointment, isLoading: appointmentLoading } =
@@ -21,6 +22,7 @@ function ServiceAppointment({ handleClose }) {
   const [serviceId, setServiceId] = useState("");
   const [gender, setGender] = useState("");
   const [paymentType, setPaymentType] = useState("");
+  const [patientOptions, setPatientOptions] = useState([]);
   // const [selectedTimeSlot, setSelectedTimeslot] = useState("");
   //   const [timeSlot, setTimeSlot] = useState("");
   //   const [appointmentDate, setAppointmentDate] = useState();
@@ -125,12 +127,11 @@ function ServiceAppointment({ handleClose }) {
         <div className="row mt-2">
           <div className="col-md-6">
             <div className="form-group">
-              <InputField
+              <PatientSearchField
                 name="patientname"
                 label="Patient Name"
-                validation={{ required: "Patient Name is required" }}
-                placeholder="Enter patient name"
-                type="text"
+                patientOptions={patientOptions}
+                setPatientOptions={setPatientOptions}
               />
             </div>
           </div>
@@ -192,7 +193,7 @@ function ServiceAppointment({ handleClose }) {
               label="Amount"
               validation={{ required: "Amount is required" }}
               type="price"
-              disabled={true}
+              // disabled={true}
             />
           </div>
         </div>
