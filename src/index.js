@@ -20,12 +20,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./hooks/useAuth.js";
 import { queryClient } from "./apis/queryClient.js";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import InstallBanner from "./components/InstallBanner.jsx";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <InstallBanner/>
       <Approuter />
     </AuthProvider>
   </QueryClientProvider>
