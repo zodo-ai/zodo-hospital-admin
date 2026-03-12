@@ -5,6 +5,5 @@ export const useDoctorsRevenue = (query) => {
   return useQuery({
     queryKey: ["doctorsRevenue", query],
     queryFn: () => getDoctorsRevenue(query),
-    enabled: !!query,
   });
 };
