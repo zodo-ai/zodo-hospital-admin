@@ -14,8 +14,12 @@ import { toast } from "react-toastify";
 import SelectField from "../Inputfields/SelectField";
 import { useGetDistrict } from "../../hooks/useGetDistrict";
 import { useHospitalDocuments } from "../../hooks/hospital/useHospitalDocuments";
+import WhatsappConfig from "./WhatsappConfig";
+import { useParams } from "react-router-dom";
+
 function EditHospitalForm() {
   const methods = useForm();
+  const { id } = useParams();
   const { hospitalId } = useAuth();
   const [fileURL, setFileURL] = useState("");
   const navigate = useNavigate();
@@ -94,6 +98,10 @@ function EditHospitalForm() {
         billingDistrict: billingDistrictOption,
         billingState: hospitalDetails?.billing_address?.state,
         billingPincode: hospitalDetails?.billing_address?.pincode,
+
+        whatsappPhoneNumberId: hospitalDetails?.whatsapp_config?.phone_number_id || '',
+        whatsappBusinessAccountId: hospitalDetails?.whatsapp_config?.business_account_id || '',
+        whatsappAccessToken: '',
       });
     }
   }, [hospitalDetails, methods]);
@@ -177,6 +185,24 @@ function EditHospitalForm() {
   const handleFileURL = (url) => {
     setFileURL(url);
   };
+
+const handleSaveWhatsappConfig = () => {
+      const { whatsappPhoneNumberId, whatsappBusinessAccountId, whatsappAccessToken } = methods.getValues();
+
+      if (!whatsappPhoneNumberId || !whatsappBusinessAccountId || !whatsappAccessToken) {
+        toast.error("Please fill all Whatsapp configuration details.");
+        return;
+      }
+
+    const configData = {
+      hospital_id: id,
+      phone_number_id: whatsappPhoneNumberId,
+      business_account_id: whatsappBusinessAccountId,
+      access_token: whatsappAccessToken,
+    }
+    console.log("Saving WhatsApp Config:", configData);
+    toast.success("WhatsApp configuration saved!");
+  }
 
   return (
     <FormProvider {...methods}>
@@ -624,6 +650,13 @@ function EditHospitalForm() {
             </div>
           </div>
         </div>
+
+        
+     <WhatsappConfig
+       onSave={handleSaveWhatsappConfig}
+       hospitalId={hospitalId}
+     />
+
 
         <div className="row">
           <div className="settings-btns col-md-6 col-sm-12">
