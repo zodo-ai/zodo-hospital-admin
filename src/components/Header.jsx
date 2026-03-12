@@ -5,7 +5,6 @@ import { baricon1, user_profile, mainLogo, logout_01 } from "./imagepath";
 import { useAuth } from "../hooks/useAuth";
 import { useViewHospital } from "../hooks/hospital/useViewHospital";
 import ConfirmLogout from "./modals/ConfirmLogout";
-import InstallAppButton from "./InstallAppButton";
 
 const Header = () => {
   const { user, setUser, hospitalId, setHospitalId } = useAuth();
@@ -81,7 +80,6 @@ const Header = () => {
           <img src={baricon1} alt="" />
         </Link>
         <ul className="nav user-menu float-end">
-          <li><InstallAppButton className="nav-item mt-5"/></li>
           <li className="nav-item dropdown has-arrow user-profile-list">
             <Link
               to="#"

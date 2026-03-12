@@ -18,6 +18,7 @@ import { useAuth } from "../../hooks/useAuth";
 import SelectField from "../Inputfields/SelectField";
 import PropTypes from "prop-types";
 import { useDoctorView } from "../../hooks/doctors/useDoctorView";
+import PatientSearchField from "../Inputfields/PatientSearchField";
 
 function ConsultationAppointment({ handleClose }) {
   const { hospitalId } = useAuth();
@@ -48,6 +49,7 @@ function ConsultationAppointment({ handleClose }) {
   const [doctorId, setDoctorId] = useState("");
   const { data: doctor } = useDoctorView(doctorId);
   const isAutoBookingEnabled = doctor?.auto_booking_enabled;
+  const [patientOptions, setPatientOptions] = useState([]);
 
   useEffect(() => {
     if (doctor) {
@@ -175,12 +177,11 @@ function ConsultationAppointment({ handleClose }) {
         <div className="row mt-2">
           <div className="col-md-6">
             <div className="form-group">
-              <InputField
+              <PatientSearchField
                 name="patientname"
                 label="Patient Name"
-                validation={{ required: "Patient Name is required" }}
-                placeholder="Enter patient name"
-                type="text"
+                patientOptions={patientOptions}
+                setPatientOptions={setPatientOptions}
               />
             </div>
           </div>
@@ -240,9 +241,9 @@ function ConsultationAppointment({ handleClose }) {
             <InputField
               name="amount"
               label="Amount"
-              // validation={{ required: "Amount is required" }}
+              validation={{ required: "Amount is required" }}
               type="price"
-              disabled
+              // disabled
             />
           </div>
         </div>
