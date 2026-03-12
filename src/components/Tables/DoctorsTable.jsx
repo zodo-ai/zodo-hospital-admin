@@ -92,17 +92,23 @@ function DoctorsTable(props) {
     {
       title: "DEPARTMENTS",
       dataIndex: "departments",
-
       key: "departments",
-      render: (departments) => (
-        <div className="d-flex flex-wrap gap-2" style={{ maxWidth: "200px" }}>
-          {departments?.map((dept) => (
-            <Tag key={dept.id} color="cyan">
-              {dept.name}
-            </Tag>
-          ))}
-        </div>
-      ),
+      render: (departments) => {
+        if (!departments || departments.length === 0) return "-";
+
+        const firstDept = departments[0];
+        const remainingCount = departments.length - 1;
+
+        return (
+          <div className="d-flex flex-wrap gap-0.5" style={{ maxWidth: "200px" }}>
+            <Tag color="cyan">{firstDept.name}</Tag>
+
+            {remainingCount > 0 && (
+              <Tag color="default">+{remainingCount}</Tag>
+            )}
+          </div>
+        );
+      },
     },
     {
       title: "PRICING",
