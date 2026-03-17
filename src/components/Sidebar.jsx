@@ -252,6 +252,24 @@ const Sidebar = (props) => {
                     </Link>
                   </li>
                 )}
+
+                {userRole === "hsAdmin" && user?.hospital?.whatsapp_config?.is_enabled && (
+                  <li className="submenu">
+                    <Link
+                      className={
+                        props?.activeClassName === "whatsapp-marketing" ? "active" : ""
+                      }
+                      id="menu-item-whatsapp-marketing"
+                      to="/whatsapp-marketing"
+                      onClick={handleMenuClick}
+                    >
+                      <span className="menu-side">
+                        <img src={menuicon09} alt="" />
+                      </span>{" "}
+                      <span> WhatsApp Marketing </span>
+                    </Link>
+                  </li>
+                )}
               </ul>
               <div className="logout-btn submenu">
                 <Link
