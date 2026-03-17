@@ -253,7 +253,7 @@ const Sidebar = (props) => {
                   </li>
                 )}
 
-                {userRole === "hsAdmin" && user?.hospital?.whatsapp_config?.is_enabled && (
+                {userRole === "hsAdmin" &&  (
                   <li className="submenu">
                     <Link
                       className={
@@ -266,7 +266,7 @@ const Sidebar = (props) => {
                       <span className="menu-side">
                         <img src={menuicon09} alt="" />
                       </span>{" "}
-                      <span> WhatsApp Marketing </span>
+                      <span> Marketing </span>
                     </Link>
                   </li>
                 )}

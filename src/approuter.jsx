@@ -26,7 +26,7 @@ import Finance from "./components/pages/Finance/Finance";
 import Departments from "./components/pages/Hospitals/Departments";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import VerifyOtp from "./components/pages/login/Verify";
-import WhatsappMarketing from "./components/WhatsappMarketing/WhatsappMarketing";
+import WhatsappMarketing from "./components/pages/WhatsappMarketing/WhatsappMarketing";
 //Accounts
 const Approuter = () => {
   // eslint-disable-next-line no-unused-vars
