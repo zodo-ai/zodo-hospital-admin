@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth'; // assuming this exists
-import { useNavigate } from 'react-router-dom';
+
 
 const WhatsappMarketing = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
+  
   const [filters, setFilters] = useState({ doctorId: '', serviceId: '', startDate: '', endDate: '' });
   const [campaign, setCampaign] = useState({ text: '', imageUrl: '', link: '' });
   const [count, setCount] = useState(null);

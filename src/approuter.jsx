@@ -59,7 +59,6 @@ const Approuter = () => {
           </Route>
           <Route path="/unauthorized" element={<ServerError />} />
           {/* <Route path="*" element={<ServerError />} /> */}
-          <Route path="*" element={<Error />} />
 
           {/* <Route
             element={
@@ -71,7 +70,7 @@ const Approuter = () => {
 
           <Route
             element={
-              <ProtectedRouter allowedRoles={user?.user_type && "hsAdmin"} />
+              <ProtectedRouter allowedRoles={user?.user_type && ["hsAdmin"]} />
             }
           >
             <Route path="/" element={<Dashboard />} />
@@ -88,6 +87,7 @@ const Approuter = () => {
             <Route path="/finance" element={<Finance />} />
             <Route path="/whatsapp-marketing" element={<WhatsappMarketing />} />
           </Route>
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
       <div className="sidebar-overlay"></div>
