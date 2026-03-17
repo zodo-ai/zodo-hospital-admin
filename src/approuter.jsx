@@ -26,6 +26,7 @@ import Finance from "./components/pages/Finance/Finance";
 import Departments from "./components/pages/Hospitals/Departments";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import VerifyOtp from "./components/pages/login/Verify";
+import WhatsappMarketing from "./components/WhatsappMarketing/WhatsappMarketing";
 //Accounts
 const Approuter = () => {
   // eslint-disable-next-line no-unused-vars
@@ -85,6 +86,7 @@ const Approuter = () => {
             <Route path="/hospital/departments" element={<Departments />} />
             <Route path="/hospital/edit" element={<EditHospital />} />
             <Route path="/finance" element={<Finance />} />
+            <Route path="/whatsapp-marketing" element={<WhatsappMarketing />} />
           </Route>
         </Routes>
       </BrowserRouter>
