@@ -65,7 +65,7 @@ const Approuter = () => {
               <ProtectedRouter allowedRoles={user?.user_type && ["staff"]} />
             }
           > */}
-            <Route path="/appointment" element={<Appointment />} />
+          <Route path="/appointment" element={<Appointment />} />
           {/* </Route> */}
 
           <Route

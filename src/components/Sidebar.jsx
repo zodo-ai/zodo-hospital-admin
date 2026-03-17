@@ -88,7 +88,7 @@ const Sidebar = (props) => {
               className="sidebar-menu"
               onMouseLeave={expandMenu}
               onMouseOver={expandMenuOpen}
-            > 
+            >
               <ul className="mt-5">
                 {userRole === "hsAdmin" && (
                   <li className="submenu">
@@ -178,9 +178,9 @@ const Sidebar = (props) => {
                       }
                       className={
                         props?.activeClassName === "hospital-services" ||
-                        props?.activeClassName === "hospital-departments" ||
-                        props?.activeClassName === "edit-hospital" ||
-                        props?.activeClassName === "manage-doctors"
+                          props?.activeClassName === "hospital-departments" ||
+                          props?.activeClassName === "edit-hospital" ||
+                          props?.activeClassName === "manage-doctors"
                           ? "active"
                           : ""
                       }
