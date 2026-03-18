@@ -91,6 +91,14 @@ const WhatsappMarketing = () => {
 
   // 🔹 Submit Campaign
   const onSubmit = (data) => {
+    if (!data.text && !imageUrl) {
+      methods.setError("text", {
+        type: "manual",
+        message: "Please provide either a message or an image",
+      });
+      return;
+    }
+
     sendCampaign(
       {
         hospitalId,
@@ -104,9 +112,9 @@ const WhatsappMarketing = () => {
       },
       {
         onSuccess: () => {
-          methods.reset();     
-          setImageUrl("");     
-          setCount(null);      
+          methods.reset();
+          setImageUrl("");
+          setCount(null);
         },
       }
     );
@@ -204,25 +212,24 @@ const WhatsappMarketing = () => {
 
                     <div className="p-4">
 
-                      <TextArea
-                        name="text"
-                        label="Message"
-                        validation={{ required: "Message is required" }}
-                      />
-
                       {/* 🔹 File Upload */}
                       <div className="mt-3">
                         <label className="form-label">Upload Image</label>
 
                         <ChooseFile
                           fileURL={imageUrl}
-                          handleFileURL={(url) => setImageUrl(url)}
+                          handleFileURL={(url) => {
+                            setImageUrl(url);
+                            methods.clearErrors("text");
+                          }}
                         />
                       </div>
 
-                      <div className="mt-3">
-                        <InputField name="link" label="Link" />
-                      </div>
+                      <TextArea
+                        name="text"
+                        label="Message"
+                        onChange={() => methods.clearErrors("text")}
+                      />
 
                       <Button
                         variant="primary"
