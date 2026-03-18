@@ -12,6 +12,7 @@ import {
   menuicon13,
   menuicon04,
   emptyWallet,
+  sendicon,
 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useAuth } from "../hooks/useAuth";
@@ -253,7 +254,7 @@ const Sidebar = (props) => {
                   </li>
                 )}
 
-                {userRole === "hsAdmin" && user?.hospital?.whatsapp_config?.is_enabled && (
+                {userRole === "hsAdmin" &&  (
                   <li className="submenu">
                     <Link
                       className={
@@ -264,9 +265,9 @@ const Sidebar = (props) => {
                       onClick={handleMenuClick}
                     >
                       <span className="menu-side">
-                        <img src={menuicon09} alt="" />
+                        <img src={sendicon} alt="" />
                       </span>{" "}
-                      <span> WhatsApp Marketing </span>
+                      <span> Marketing </span>
                     </Link>
                   </li>
                 )}
