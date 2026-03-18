@@ -12,6 +12,7 @@ import {
   menuicon13,
   menuicon04,
   emptyWallet,
+  sendicon,
 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useAuth } from "../hooks/useAuth";
@@ -88,7 +89,7 @@ const Sidebar = (props) => {
               className="sidebar-menu"
               onMouseLeave={expandMenu}
               onMouseOver={expandMenuOpen}
-            > 
+            >
               <ul className="mt-5">
                 {userRole === "hsAdmin" && (
                   <li className="submenu">
@@ -178,9 +179,9 @@ const Sidebar = (props) => {
                       }
                       className={
                         props?.activeClassName === "hospital-services" ||
-                        props?.activeClassName === "hospital-departments" ||
-                        props?.activeClassName === "edit-hospital" ||
-                        props?.activeClassName === "manage-doctors"
+                          props?.activeClassName === "hospital-departments" ||
+                          props?.activeClassName === "edit-hospital" ||
+                          props?.activeClassName === "manage-doctors"
                           ? "active"
                           : ""
                       }
@@ -249,6 +250,24 @@ const Sidebar = (props) => {
                         <img src={emptyWallet} alt="" />
                       </span>{" "}
                       <span> Finance </span>
+                    </Link>
+                  </li>
+                )}
+
+                {userRole === "hsAdmin" &&  (
+                  <li className="submenu">
+                    <Link
+                      className={
+                        props?.activeClassName === "whatsapp-marketing" ? "active" : ""
+                      }
+                      id="menu-item-whatsapp-marketing"
+                      to="/whatsapp-marketing"
+                      onClick={handleMenuClick}
+                    >
+                      <span className="menu-side">
+                        <img src={sendicon} alt="" />
+                      </span>{" "}
+                      <span> Marketing </span>
                     </Link>
                   </li>
                 )}

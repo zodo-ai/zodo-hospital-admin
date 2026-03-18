@@ -26,6 +26,7 @@ import Finance from "./components/pages/Finance/Finance";
 import Departments from "./components/pages/Hospitals/Departments";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import VerifyOtp from "./components/pages/login/Verify";
+import WhatsappMarketing from "./components/pages/WhatsappMarketing/WhatsappMarketing";
 //Accounts
 const Approuter = () => {
   // eslint-disable-next-line no-unused-vars
@@ -58,19 +59,18 @@ const Approuter = () => {
           </Route>
           <Route path="/unauthorized" element={<ServerError />} />
           {/* <Route path="*" element={<ServerError />} /> */}
-          <Route path="*" element={<Error />} />
 
           {/* <Route
             element={
               <ProtectedRouter allowedRoles={user?.user_type && ["staff"]} />
             }
           > */}
-            <Route path="/appointment" element={<Appointment />} />
+          <Route path="/appointment" element={<Appointment />} />
           {/* </Route> */}
 
           <Route
             element={
-              <ProtectedRouter allowedRoles={user?.user_type && "hsAdmin"} />
+              <ProtectedRouter allowedRoles={user?.user_type && ["hsAdmin"]} />
             }
           >
             <Route path="/" element={<Dashboard />} />
@@ -85,7 +85,9 @@ const Approuter = () => {
             <Route path="/hospital/departments" element={<Departments />} />
             <Route path="/hospital/edit" element={<EditHospital />} />
             <Route path="/finance" element={<Finance />} />
+            <Route path="/whatsapp-marketing" element={<WhatsappMarketing />} />
           </Route>
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
       <div className="sidebar-overlay"></div>
