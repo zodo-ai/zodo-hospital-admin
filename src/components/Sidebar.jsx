@@ -12,6 +12,7 @@ import {
   menuicon13,
   menuicon04,
   emptyWallet,
+  sendicon,
 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useAuth } from "../hooks/useAuth";
@@ -264,7 +265,7 @@ const Sidebar = (props) => {
                       onClick={handleMenuClick}
                     >
                       <span className="menu-side">
-                        <img src={menuicon09} alt="" />
+                        <img src={sendicon} alt="" />
                       </span>{" "}
                       <span> Marketing </span>
                     </Link>

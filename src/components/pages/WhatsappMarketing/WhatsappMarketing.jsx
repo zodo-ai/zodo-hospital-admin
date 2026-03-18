@@ -29,17 +29,21 @@ const WhatsappMarketing = () => {
   const { data: doctorsList } = useDoctorsList(hospitalId);
   const { data: servicesList } = useHospitalServices(hospitalId);
 
-  const doctorOptions =
-    doctorsList?.map((doc) => ({
+  const doctorOptions = [
+    { label: "All Doctors", value: "" },
+    ...(doctorsList?.map((doc) => ({
       label: doc.name,
       value: doc.id,
-    })) || [];
+    })) || []),
+  ];
 
-  const serviceOptions =
-    servicesList?.map((srv) => ({
+  const serviceOptions = [
+    { label: "All Services", value: "" },
+    ...(servicesList?.map((srv) => ({
       label: srv.name,
       value: srv.id,
-    })) || [];
+    })) || []),
+  ];
 
   // 🔹 Hooks
   const { mutate: getCount, isPending: countLoading } = useAudienceCount();
@@ -161,18 +165,29 @@ const WhatsappMarketing = () => {
                       </div>
 
                       <div className="d-flex justify-content-between text-muted mt-3 small">
-                        <span>Estimated reach</span>
+                        <div className="d-flex align-items-center gap-2">
+                          <img src={ProfileUser} alt="users" width={18} />
+                          <div>Estimated reach</div>
+                        </div>
                         <strong>{count ?? "--"}</strong>
                       </div>
 
                       <Button
+                        variant="primary"
                         type="button"
-                        className="w-100 mt-3 d-flex align-items-center justify-content-center gap-2"
+                        className="w-100 mt-3"
                         onClick={getAudienceCountHandler}
                         disabled={countLoading}
                       >
-                        <img src={ProfileUser} alt="users" width={18} />
-                        {countLoading ? "Checking..." : "Check Audience Count"}
+                        {countLoading && (
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            aria-hidden="true"
+                          ></span>
+                        )}
+                        <span className="ps-2">
+                          Check Audience Count
+                        </span>
                       </Button>
                     </div>
                   </div>
@@ -209,8 +224,19 @@ const WhatsappMarketing = () => {
                         <InputField name="link" label="Link" />
                       </div>
 
-                      <Button type="submit" className="w-100 mt-3" disabled={sending}>
-                        {sending ? "Sending..." : "Send Campaign"}
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="w-100 mt-3"
+                        disabled={sending}
+                      >
+                        {sending && (
+                          <span
+                            className="spinner-border spinner-border-sm"
+                            aria-hidden="true"
+                          ></span>
+                        )}
+                        <span className="ps-2">Send Campaign</span>
                       </Button>
 
                     </div>
