@@ -27,6 +27,11 @@ import Departments from "./components/pages/Hospitals/Departments";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import VerifyOtp from "./components/pages/login/Verify";
 import WhatsappMarketing from "./components/pages/WhatsappMarketing/WhatsappMarketing";
+import EnquiriesManage from "./components/pages/Enquiries/EnquiriesManage";
+import BannersManage from "./components/pages/HospitalWeb/BannersManage";
+import GalleryManage from "./components/pages/HospitalWeb/GalleryManage";
+import TestimonialsManage from "./components/pages/HospitalWeb/TestimonialsManage";
+import SettingsManage from "./components/pages/HospitalWeb/SettingsManage";
 //Accounts
 const Approuter = () => {
   // eslint-disable-next-line no-unused-vars
@@ -86,6 +91,11 @@ const Approuter = () => {
             <Route path="/hospital/edit" element={<EditHospital />} />
             <Route path="/finance" element={<Finance />} />
             <Route path="/whatsapp-marketing" element={<WhatsappMarketing />} />
+            <Route path="/enquiries" element={<EnquiriesManage />} />
+            <Route path="/hospital-web/settings" element={<SettingsManage />} />
+            <Route path="/hospital-web/banners" element={<BannersManage />} />
+            <Route path="/hospital-web/gallery" element={<GalleryManage />} />
+            <Route path="/hospital-web/testimonials" element={<TestimonialsManage />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
