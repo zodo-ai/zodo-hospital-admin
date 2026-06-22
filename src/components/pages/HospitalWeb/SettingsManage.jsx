@@ -173,7 +173,7 @@ function SettingsManage() {
                           />
                         </div>
                       </div>
-                      <div className="col-md-6">
+                      {/* <div className="col-md-6">
                         <div className="form-group mb-3">
                           <label className="form-label">Secondary Color</label>
                           <Controller
@@ -201,7 +201,7 @@ function SettingsManage() {
                             )}
                           />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
 
                     <h5 className="card-title mt-4 mb-3 fw-bold">About Us</h5>
