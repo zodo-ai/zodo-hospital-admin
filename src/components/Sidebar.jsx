@@ -76,9 +76,6 @@ const Sidebar = (props) => {
           autoHide
           autoHideTimeout={1000}
           autoHideDuration={200}
-          autoHeight
-          autoHeightMin={0}
-          autoHeightMax="95vh"
           thumbMinSize={30}
           universal={false}
           hideTracksWhenNotNeeded={true}
@@ -254,6 +251,90 @@ const Sidebar = (props) => {
                   </li>
                 )}
 
+                {userRole === "hsAdmin" && (
+                  <li className="submenu">
+                    <Link
+                      to
+                      id="menu-item-hw"
+                      onClick={(e) =>
+                        handleClick(
+                          e,
+                          "menu-item-hw",
+                          "menu-items-hw",
+                          "menu-items-hw"
+                        )
+                      }
+                      className={
+                        props?.activeClassName === "hw-setting" ||
+                        props?.activeClassName === "hw-banners" ||
+                        props?.activeClassName === "hw-gallery" ||
+                        props?.activeClassName === "hw-testimonials"
+                          ? "active"
+                          : ""
+                      }
+                    >
+                      <span className="menu-side">
+                        <img src={menuicon08} alt="" />
+                      </span>{" "}
+                      <span> Hospital Web </span> <span className="menu-arrow" />
+                    </Link>
+                    <ul style={{ display: "none" }} className="menu-items-hw">
+                      <li>
+                        <Link
+                          className={
+                            props?.activeClassName === "hw-setting"
+                              ? "submenu-active"
+                              : "submenu-normal"
+                          }
+                          to="/hospital-web/settings"
+                          onClick={handleMenuClick}
+                        >
+                          Setting
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={
+                            props?.activeClassName === "hw-banners"
+                              ? "submenu-active"
+                              : "submenu-normal"
+                          }
+                          to="/hospital-web/banners"
+                          onClick={handleMenuClick}
+                        >
+                          Banner
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={
+                            props?.activeClassName === "hw-gallery"
+                              ? "submenu-active"
+                              : "submenu-normal"
+                          }
+                          to="/hospital-web/gallery"
+                          onClick={handleMenuClick}
+                        >
+                          Gallery
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={
+                            props?.activeClassName === "hw-testimonials"
+                              ? "submenu-active"
+                              : "submenu-normal"
+                          }
+                          to="/hospital-web/testimonials"
+                          onClick={handleMenuClick}
+                        >
+                          Testimonials
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                )}
+
                 {userRole === "hsAdmin" &&  (
                   <li className="submenu">
                     <Link
@@ -268,6 +349,24 @@ const Sidebar = (props) => {
                         <img src={sendicon} alt="" />
                       </span>{" "}
                       <span> Marketing </span>
+                    </Link>
+                  </li>
+                )}
+
+                {userRole === "hsAdmin" &&  (
+                  <li className="submenu">
+                    <Link
+                      className={
+                        props?.activeClassName === "enquiries" ? "active" : ""
+                      }
+                      id="menu-item-enquiries"
+                      to="/enquiries"
+                      onClick={handleMenuClick}
+                    >
+                      <span className="menu-side">
+                        <img src={menuicon09} alt="" />
+                      </span>{" "}
+                      <span> Enquiries </span>
                     </Link>
                   </li>
                 )}
