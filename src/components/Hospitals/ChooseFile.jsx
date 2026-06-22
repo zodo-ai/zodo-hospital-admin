@@ -2,9 +2,12 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import ComponentLoader from "../loaders/ComponentLoader";
 import { useUploadFile } from "../../hooks/useUploadFile";
+import { useRef } from "react";
 
 function ChooseFile(props) {
   const { handleFileURL, fileURL } = props;
+  const fileInputRef = useRef(null);
+
   // useEffect(() => {
   //   setFile(fileURL);
   // }, [fileURL]);
@@ -12,7 +15,9 @@ function ChooseFile(props) {
   // const [loading, setLoading] = useState(false);
   const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
   const handleButtonClick = () => {
-    document.getElementById("fileInput").click();
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
   const { mutate, isLoading } = useUploadFile();
   const handleFiles = async (e) => {
@@ -73,7 +78,7 @@ function ChooseFile(props) {
           <input
             type="file"
             className="form-control d-none"
-            id="fileInput"
+            ref={fileInputRef}
             onChange={handleFiles}
             accept="image/jpeg, image/png, image/gif"
           />
