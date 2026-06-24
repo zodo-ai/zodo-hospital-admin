@@ -26,6 +26,7 @@ function SettingsManage() {
   const [status, setStatus] = useState(true);
   const [logoFileURL, setLogoFileURL] = useState("");
   const [aboutUsFileURL, setAboutUsFileURL] = useState("");
+  const [directorFileURL, setDirectorFileURL] = useState("");
   const methods = useForm();
   const { control, handleSubmit, setValue } = methods;
 
@@ -37,6 +38,7 @@ function SettingsManage() {
       setValue("secondary_color", settingsData.secondary_color || "#000000");
       setLogoFileURL(settingsData.logo_image || "");
       setAboutUsFileURL(settingsData.about_us_image || "");
+      setDirectorFileURL(settingsData.director_image || "");
       setValue("director_name", settingsData.director_name || "");
       setValue("director_title", settingsData.director_title || "");
       setValue("director_message", settingsData.director_message || "");
@@ -75,6 +77,7 @@ function SettingsManage() {
       secondary_color: data.secondary_color || "",
       logo_image: logoFileURL,
       about_us_image: aboutUsFileURL,
+      director_image: directorFileURL,
       director_name: data.director_name || "",
       director_title: data.director_title || "",
       director_message: data.director_message || "",
@@ -249,6 +252,10 @@ function SettingsManage() {
 
                     <h5 className="card-title mt-4 mb-3 fw-bold">Director Message</h5>
                     <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label className="form-label">Director Image</label>
+                        <ChooseFile handleFileURL={setDirectorFileURL} fileURL={directorFileURL} />
+                      </div>
                       <div className="col-md-12">
                         <div className="form-group mb-3">
                           <InputField
@@ -263,7 +270,7 @@ function SettingsManage() {
                         <div className="form-group mb-3">
                           <InputField
                             name="director_title"
-                            label="Director Title"
+                            label="Director Message Title"
                             placeholder="Enter director title"
                             type="text"
                           />
