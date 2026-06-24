@@ -28,7 +28,7 @@ function RequestForm(props) {
     const paymentRequest = {
       hospital_id: hospitalId,
       // "doctor_id":"",
-      amount: data.requestAmount,
+      amount: Number(data.requestAmount),
       note: "",
     };
     if (data?.requestAmount <= 0) {
